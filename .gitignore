@@ -1,0 +1,5 @@
+/.vscode
+/_test
+/bin
+/.pytest_cache
+__pycache__/
