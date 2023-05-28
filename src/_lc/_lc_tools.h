@@ -1,48 +1,7 @@
-#pragma once
-#include <bits/stdc++.h>
-using namespace std;
+#ifndef _LEETCODE_LC_TOOLS
+#define _LEETCODE_LC_TOOLS 1
 
-template <typename T>
-ostream &operator<<(ostream &out, const vector<T> &nums)
-{
-    // 支持matrix等.
-    out << '[';
-    int n = nums.size();
-    for (int i = 0; i < n; ++i)
-    {
-        const T &x = nums[i];
-        if (i > 0)
-        {
-            cout << ", ";
-        }
-        out << x;
-    }
-    out << ']';
-    return out;
-}
-
-template <typename T>
-ostream &operator<<(ostream &out, const optional<T> &nums)
-{
-    if (nums.has_value())
-    {
-        out << nums.value();
-    }
-    else
-    {
-        out << "null";
-    }
-    return out;
-}
-
-struct ListNode
-{
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
+#include <_lc/_lc_ds.h>
 
 ListNode *to_linkedlist(const vector<int> &v)
 {
@@ -63,16 +22,6 @@ void from_linkedlist(ListNode *&head, vector<int> &res)
         head = head->next;
     }
 }
-
-struct TreeNode
-{
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
 
 TreeNode *to_tree(const vector<optional<int>> &v)
 {
@@ -155,3 +104,4 @@ void from_tree(TreeNode *&root, vector<optional<int>> &res)
         res.pop_back();
     }
 }
+#endif // _LEETCODE_LC_TOOLS

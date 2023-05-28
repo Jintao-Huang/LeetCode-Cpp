@@ -1,0 +1,9 @@
+#ifndef _LEETCODE_H
+#define _LEETCODE_H 1
+
+#include <_io.h>
+#include <_types.h>
+#include <_lc/_lc_ds.h>
+#include <_lc/_lc_tools.h>
+
+#endif // _LEETCODE_H

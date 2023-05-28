@@ -1,4 +1,4 @@
-#include "pre.h"
+#include <leetcode>
 
 class Solution
 {
