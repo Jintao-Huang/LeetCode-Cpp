@@ -1,42 +1,35 @@
 #include <leetcode>
 
-class Solution
-{
-public:
-    bool isValid(const string &s)
-    {
+class Solution {
+   public:
+    bool isValid(const string &s) {
         stack<char> st;
-        for (const char &c : s)
-        {
-            switch (c)
-            {
-            case '(':
-            case '[':
-            case '{':
-                st.push(c);
-                break;
-            //
-            case ')':
-                if (st.empty() || st.top() != '(')
-                {
-                    return false;
-                }
-                st.pop();
-                break;
-            case ']':
-                if (st.empty() || st.top() != '[')
-                {
-                    return false;
-                }
-                st.pop();
-                break;
-            case '}':
-                if (st.empty() || st.top() != '{')
-                {
-                    return false;
-                }
-                st.pop();
-                break;
+        for (char c : s) {
+            switch (c) {
+                case '(':
+                case '[':
+                case '{':
+                    st.push(c);
+                    break;
+                //
+                case ')':
+                    if (st.empty() || st.top() != '(') {
+                        return false;
+                    }
+                    st.pop();
+                    break;
+                case ']':
+                    if (st.empty() || st.top() != '[') {
+                        return false;
+                    }
+                    st.pop();
+                    break;
+                case '}':
+                    if (st.empty() || st.top() != '{') {
+                        return false;
+                    }
+                    st.pop();
+                    break;
             }
         }
         return st.empty();
@@ -46,20 +39,13 @@ public:
 class Solution2
 /// 使用hashmap
 {
-public:
-    bool isValid(const string &s)
-    {
-        unordered_map<char, char> mapper = {
-            {')', '('},
-            {']', '['},
-            {'}', '{'}};
+   public:
+    bool isValid(const string &s) {
+        unordered_map<char, char> mapper = {{')', '('}, {']', '['}, {'}', '{'}};
         stack<char> st;
-        for (const char &c : s)
-        {
-            if (mapper.count(c))
-            {
-                if (st.empty() || st.top() != mapper[c])
-                {
+        for (char c : s) {
+            if (mapper.count(c)) {
+                if (st.empty() || st.top() != mapper[c]) {
                     return false;
                 }
                 st.pop();
@@ -72,8 +58,7 @@ public:
     }
 };
 
-int main()
-{
+int main() {
     string s = "()";
     cout << Solution().isValid(s) << '\n';
     cout << Solution2().isValid(s) << '\n';

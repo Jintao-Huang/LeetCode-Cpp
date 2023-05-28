@@ -1,13 +1,14 @@
 {
     "files.exclude": {
-		"**/.git": true,
-		"**/__pycache__": true
-	},
-	"python.analysis.autoImportCompletions": false,
-	"python.analysis.typeCheckingMode": "basic",
-	"python.formatting.autopep8Args": [
+        "**/.git": true,
+        "**/__pycache__": true
+    },
+    "python.analysis.autoImportCompletions": false,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.formatting.autopep8Args": [
         "--max-line-length=120"
-	],
+    ],
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, ColumnLimit: 120 , IndentWidth: 4 }",
     "files.associations": {
         "*.cpp": "cpp",
         "*.txt": "plaintext",

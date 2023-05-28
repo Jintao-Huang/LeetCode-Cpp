@@ -3,7 +3,16 @@
 
 #include <_io.h>
 #include <_types.h>
+
+// _alg
+#include <_alg/_array.h>
+#include <_alg/_search.h>
+
+// _ds
+
+// _lc
 #include <_lc/_lc_ds.h>
 #include <_lc/_lc_tools.h>
-
-#endif // _LEETCODE_H
+//
+using namespace leetcode;
+#endif  // _LEETCODE_H

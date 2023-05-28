@@ -126,4 +126,6 @@
 #include <syncstream>
 #include <version>
 #endif
+//
+using namespace std;
 #endif  // _LEETCODE_TYPES_H

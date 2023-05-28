@@ -2,3 +2,4 @@
 /bin
 /.pytest_cache
 __pycache__/
+/_todo

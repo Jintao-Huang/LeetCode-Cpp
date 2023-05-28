@@ -1,20 +1,14 @@
 #include <leetcode>
 
-class Solution
-{
-public:
-    ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
-    {
+class Solution {
+   public:
+    ListNode *mergeTwoLists(ListNode *list1, ListNode *list2) {
         ListNode *dummy = new ListNode(), *p = dummy;
-        while (list1 != nullptr && list2 != nullptr)
-        {
-            if (list1->val <= list2->val)
-            {
+        while (list1 != nullptr && list2 != nullptr) {
+            if (list1->val <= list2->val) {
                 p->next = list1;
                 list1 = list1->next;
-            }
-            else
-            {
+            } else {
                 p->next = list2;
                 list2 = list2->next;
             }
@@ -25,8 +19,7 @@ public:
     }
 };
 
-int main()
-{
+int main() {
     ListNode *list1 = to_linkedlist({1, 2, 4});
     ListNode *list2 = to_linkedlist({1, 3, 4});
     ListNode *res = Solution().mergeTwoLists(list1, list2);

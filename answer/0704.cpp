@@ -1,24 +1,24 @@
 #include <leetcode>
 
-class Solution
-{
-public:
-    int search(vector<int> &nums, int target)
-    {
+class Solution {
+   public:
+    int search(vector<int> &nums, int target) {
         vector<int>::iterator it = lower_bound(nums.begin(), nums.end(), target);
-        if (it == nums.end() || *it != target)
-        {
+        if (it == nums.end() || *it != target) {
             return -1;
-        }
-        else
-        {
+        } else {
             return distance(nums.begin(), it);
         }
     }
 };
 
-int main()
-{
+class Solution2 {
+   public:
+    inline int search(vector<int> &nums, int target) { return binary_search_lc(nums, target); }
+};
+
+int main() {
     vector<int> nums = {-1, 0, 3, 5, 9, 12};
     cout << Solution().search(nums, 9) << '\n';
+    cout << Solution2().search(nums, 9) << '\n';
 }

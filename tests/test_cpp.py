@@ -6,12 +6,13 @@ import os
 
 class MyTest(ut.TestCase):
     def test_cpp(self):
-        folder = "./bin"
-        fnames = sorted(fname for fname in os.listdir(folder) if len(fname) == 4)
+        fnames = sorted(fname for fname in os.listdir("answer"))
         for fname in fnames:
-            path = os.path.join(folder, fname)
-            print(f"<<< {path}")
-            os.system(path)
+            print(f"<<< {fname}")
+            fname_no_ext = fname.rsplit('.', 1)[0]
+            command = f"/usr/bin/g++-11 -fdiagnostics-color=always -g ./answer/{fname}  -o ./bin/{fname_no_ext} -I ./src"
+            os.system(command)
+            os.system(f"./bin/{fname_no_ext}")
 
 
 if __name__ == "__main__":
