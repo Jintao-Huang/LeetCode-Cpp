@@ -18,10 +18,8 @@ class Solution {
         return {};
     }
 };
-
-class Solution2 {
-    /// TODO: 哈希表.
-};
+/// TODO: 哈希表.
+class Solution2 {};
 
 int main() {
     vector<int> v = {2, 7, 11, 15};

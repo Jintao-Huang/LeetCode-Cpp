@@ -13,6 +13,11 @@
 // _lc
 #include <_lc/_lc_ds.h>
 #include <_lc/_lc_tools.h>
-//
+// _stl
+#include <_stl/_algorithm.h>
+// _ml
+#include <_ml/_utils.h>
+#include <_ml/_np.h>
+
 using namespace leetcode;
-#endif  // _LEETCODE_H
+#endif

@@ -1,5 +1,5 @@
-#ifndef _LEETCODE_LC_TOOLS
-#define _LEETCODE_LC_TOOLS 1
+#ifndef _LEETCODE_LC_TOOLS_H
+#define _LEETCODE_LC_TOOLS_H 1
 
 #include <_lc/_lc_ds.h>
 #include <_types.h>
@@ -86,4 +86,4 @@ void from_tree(TreeNode *root, vector<optional<int>> &res) {
     }
 }
 }  // namespace leetcode
-#endif  // _LEETCODE_LC_TOOLS
+#endif

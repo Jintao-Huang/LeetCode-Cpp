@@ -8,7 +8,7 @@
     "python.formatting.autopep8Args": [
         "--max-line-length=120"
     ],
-    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, ColumnLimit: 120 , IndentWidth: 4 }",
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, ColumnLimit: 100 , IndentWidth: 4 }",
     "files.associations": {
         "*.cpp": "cpp",
         "*.txt": "plaintext",
@@ -103,6 +103,7 @@
         "cassert": "cpp",
         "ios": "cpp",
         "locale": "cpp",
-        "leetcode": "cpp"
+        "leetcode": "cpp",
+        "strstream": "cpp"
     }
 }

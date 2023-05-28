@@ -11,7 +11,7 @@ class Solution {
         while (!dq.empty()) {
             int n = dq.size();
             vector<int> r;
-            while (n--) {
+            for (int _i = 0; _i < n; ++_i) {
                 TreeNode *parent = dq.front(), *lc = parent->left, *rc = parent->right;
                 dq.pop_front();
                 r.push_back(parent->val);

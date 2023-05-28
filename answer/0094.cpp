@@ -17,9 +17,8 @@ class Solution {
     }
 };
 
-class Solution2 {
-    /// TODO: 迭代法
-};
+/// TODO: 迭代法
+class Solution2 {};
 
 int main() {
     vector<optional<int>> v = {1, nullopt, 2, 3};

@@ -20,4 +20,4 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 }  // namespace leetcode
-#endif  // _LEETCODE_LC_DS_H
+#endif

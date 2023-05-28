@@ -36,9 +36,9 @@ class Solution {
     }
 };
 
-class Solution2
 /// 使用hashmap
-{
+
+class Solution2 {
    public:
     bool isValid(const string &s) {
         unordered_map<char, char> mapper = {{')', '('}, {']', '['}, {'}', '{'}};
@@ -58,8 +58,36 @@ class Solution2
     }
 };
 
+/// 使用if else
+class Solution3 {
+   public:
+    bool isValid(string s) {
+        stack<char> st;
+        int n = s.size();
+        for (int i = 0; i < n; i++) {
+            if (s[i] == '(' || s[i] == '[' || s[i] == '{') {
+                st.push(s[i]);
+                continue;
+            }
+            //
+            if (st.empty()) {
+                return false;
+            }
+            //
+            if (s[i] == ')' && st.top() == '(' || s[i] == ']' && st.top() == '[' ||
+                s[i] == '}' && st.top() == '{') {
+                st.pop();
+            } else {
+                return false;
+            }
+        }
+        return st.empty();
+    }
+};
+
 int main() {
     string s = "()";
     cout << Solution().isValid(s) << '\n';
     cout << Solution2().isValid(s) << '\n';
+    cout << Solution3().isValid(s) << '\n';
 }
