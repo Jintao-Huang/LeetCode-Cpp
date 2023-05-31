@@ -1,5 +1,5 @@
 #include <leetcode>
-
+using namespace leetcode;
 int main() {
     vector<int> v = {1, 2, 3, 4};
     cout << ml::sum(v) << '\n';
@@ -16,4 +16,5 @@ int main() {
     cout << ml::min(v2) << '\n';
     cout << ml::var(v2) << '\n';
     cout << ml::std(v2) << '\n';
+    return 0;
 }

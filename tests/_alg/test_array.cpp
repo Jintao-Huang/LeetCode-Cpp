@@ -1,5 +1,5 @@
 #include <leetcode>
-
+using namespace leetcode;
 int main() {
     cout << euclidean_dist(1, 2, 3, 4) << '\n';
     cout << manhattan_dist(1, 2, 3, 4) << '\n';
@@ -8,10 +8,12 @@ int main() {
     partial_sum_lc(v, v2);
     cout << v2 << '\n';
     v2.clear();
-    partial_sum_lc(v, v2, 0);
+    v2.push_back(1);
+    partial_sum_lc(v, v2);
     cout << v2 << '\n';
     v2.clear();
-    partial_sum_lc(v, v2, 1, multiplies<>());
+    v2.push_back(3);
+    partial_sum_lc(v, v2, multiplies<>());
     cout << v2 << '\n';
-    //
+    return 0;
 }

@@ -1,32 +1,94 @@
-#ifndef _LEETCODE_IO_H
-#define _LEETCODE_IO_H 1
+#ifndef _IO_H
+#define _IO_H 1
 #include <_types.h>
 
-namespace leetcode {
+namespace std {
+template <typename InputIterator>
+ostream &print(InputIterator first, InputIterator last, ostream &out);
+//
 template <typename Tp>
-ostream &operator<<(ostream &out, const vector<Tp> &nums) {
-    // 支持matrix等.
-    out << '[';
-    int n = nums.size();
-    for (int i = 0; i < n; ++i) {
-        const Tp &x = nums[i];
-        if (i > 0) {
-            cout << ", ";
-        }
-        out << x;
-    }
-    out << ']';
-    return out;
+inline ostream &operator<<(ostream &out, const vector<Tp> &v) {
+    return print(v.begin(), v.end(), out);
+}
+
+template <typename Tp, size_t N>
+inline ostream &operator<<(ostream &out, const array<Tp, N> &arr) {
+    return print(arr.begin(), arr.end(), out);
 }
 
 template <typename Tp>
-ostream &operator<<(ostream &out, const optional<Tp> &nums) {
-    if (nums.has_value()) {
-        out << nums.value();
+inline ostream &operator<<(ostream &out, const deque<Tp> &dq) {
+    return print(dq.begin(), dq.end(), out);
+}
+template <typename Tp>
+inline ostream &operator<<(ostream &out, const list<Tp> &l) {
+    return print(l.begin(), l.end(), out);
+}
+template <typename Tp>
+inline ostream &operator<<(ostream &out, const multiset<Tp> &s) {
+    return print(s.begin(), s.end(), out);
+}
+//
+template <typename Tp>
+inline ostream &operator<<(ostream &out, const unordered_set<Tp> &us) {
+    return print(us.begin(), us.end(), out);
+}
+
+template <typename T1, typename T2>
+inline ostream &operator<<(ostream &out, const unordered_map<T1, T2> &um) {
+    return print(um.begin(), um.end(), out);
+}
+//
+template <typename Tp, typename Sequence>
+inline ostream &operator<<(ostream &out, const stack<Tp, Sequence> &st) {
+    stack<Tp, Sequence> temp(st);
+    vector<Tp> v(st.size());
+    for (typename vector<Tp>::reverse_iterator rit = v.rbegin(); rit != v.rend(); ++rit) {
+        *rit = move(temp.top());
+        temp.pop();
+    }
+    return out << v;
+}
+template <typename Tp, typename Sequence>
+inline ostream &operator<<(ostream &out, const queue<Tp, Sequence> &q) {
+    queue<Tp, Sequence> temp(q);
+    vector<Tp> v(q.size());
+    for (typename vector<Tp>::iterator it; it != v.end(); ++it) {
+        *it = move(temp.front());
+        temp.pop();  // first
+    }
+    return out << v;
+}
+//
+template <typename Tp>
+inline ostream &operator<<(ostream &out, const optional<Tp> &opt) {
+    if (opt.has_value()) {
+        out << opt.value();
     } else {
         out << "null";
     }
     return out;
 }
-}  // namespace leetcode
+template <typename T1, typename T2>
+inline ostream &operator<<(ostream &out, const pair<T1, T2> &p) {
+    out << '<' << p.first << ", " << p.second << '>';
+    return out;
+}
+
+template <typename InputIterator>
+ostream &print(InputIterator first, InputIterator last, ostream &out) {
+    if (first == last) {
+        out << "[]";
+        return out;
+    }
+    //
+    out << '[';
+    out << *first;
+    while (++first != last) {
+        out << ", " << *first;
+    }
+    out << ']';
+    return out;
+}
+}  // namespace std
 #endif

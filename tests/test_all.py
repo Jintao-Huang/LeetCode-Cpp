@@ -7,11 +7,12 @@ import os
 class MyTest(ut.TestCase):
     def test_answer(self):
         print("<<< test_answer")
+        os.makedirs("./bin", exist_ok=True)
         fnames = sorted(fname for fname in os.listdir("./answer"))
         for fname in fnames:
             print(f"<<< {fname}")
             fname_no_ext = fname.rsplit('.', 1)[0]
-            command = f"/usr/bin/g++-11 -fdiagnostics-color=always -g ./answer/{fname}  -o ./bin/{fname_no_ext} -I ./src"
+            command = f"g++ -std=c++17 -fdiagnostics-color=always -g ./answer/{fname} -o ./bin/{fname_no_ext} -I ./src"
             os.system(command)
             os.system(f"./bin/{fname_no_ext}")
 
@@ -24,7 +25,7 @@ class MyTest(ut.TestCase):
                     continue
                 print(f"<<< {fname}")
                 src_path = os.path.join(cur_dir, fname)
-                command = f"/usr/bin/g++-11 -fdiagnostics-color=always -g {src_path}  -o ./bin/{fname_no_ext} -I ./src"
+                command = f"g++ -fdiagnostics-color=always -g {src_path} -o ./bin/{fname_no_ext} -I ./src"
                 os.system(command)
                 os.system(f"./bin/{fname_no_ext}")
 if __name__ == "__main__":

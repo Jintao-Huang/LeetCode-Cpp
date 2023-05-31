@@ -1,5 +1,5 @@
 #include <leetcode>
-
+using namespace leetcode;
 class Solution {
    public:
     ListNode *mergeTwoLists(ListNode *list1, ListNode *list2) {
@@ -23,7 +23,6 @@ int main() {
     ListNode *list1 = to_linkedlist({1, 2, 4});
     ListNode *list2 = to_linkedlist({1, 3, 4});
     ListNode *res = Solution().mergeTwoLists(list1, list2);
-    vector<int> dst;
-    from_linkedlist(res, dst);
-    cout << dst << '\n';
+    cout << res << '\n';
+    return 0;
 }

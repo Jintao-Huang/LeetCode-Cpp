@@ -1,5 +1,5 @@
-#ifndef _LEETCODE_LC_TOOLS_H
-#define _LEETCODE_LC_TOOLS_H 1
+#ifndef _LC_TOOLS_H
+#define _LC_TOOLS_H 1
 
 #include <_lc/_lc_ds.h>
 #include <_types.h>

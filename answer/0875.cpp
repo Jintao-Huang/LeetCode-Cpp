@@ -1,9 +1,9 @@
 #include <leetcode>
-
+using namespace leetcode;
 class Solution {
    public:
     int minEatingSpeed(vector<int>& piles, int h) {
-        function<bool(int)> is_valid = [&piles, h](int mid) {
+        function<bool(int)> is_valid = [&piles, h](int mid) -> bool{
             int s = 0;
             double mid_d = static_cast<double>(mid);
             for (int p : piles) {
@@ -24,4 +24,5 @@ int main() {
     vector<int> piles = {3, 6, 7, 11};
     int h = 8;
     cout << Solution().minEatingSpeed(piles, h) << '\n';
+    return 0;
 }

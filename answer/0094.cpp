@@ -1,5 +1,5 @@
 #include <leetcode>
-
+using namespace leetcode;
 class Solution {
    public:
     void _inorderTraversal(TreeNode *root, vector<int> &res) {
@@ -24,8 +24,7 @@ int main() {
     vector<optional<int>> v = {1, nullopt, 2, 3};
     cout << v << '\n';
     TreeNode *root = to_tree(v);
-    v.clear();
-    from_tree(root, v);
-    cout << v << '\n';
+    cout << root << '\n';
     cout << Solution().inorderTraversal(root) << '\n';
+    return 0;
 }

@@ -1,5 +1,5 @@
 #include <leetcode>
-
+using namespace leetcode;
 class Solution {
    public:
     bool isValid(const string &s) {
@@ -65,21 +65,17 @@ class Solution3 {
         stack<char> st;
         int n = s.size();
         for (int i = 0; i < n; i++) {
-            if (s[i] == '(' || s[i] == '[' || s[i] == '{') {
-                st.push(s[i]);
+            char c = s[i];
+            if (c == ')' || c == ']' || c == '}') {
+                if (st.empty() || c == ')' && st.top() != '(' || c == ']' && st.top() != '[' ||
+                    c == '}' && st.top() != '{') {
+                    return false;
+                }
+                st.pop();
                 continue;
             }
             //
-            if (st.empty()) {
-                return false;
-            }
-            //
-            if (s[i] == ')' && st.top() == '(' || s[i] == ']' && st.top() == '[' ||
-                s[i] == '}' && st.top() == '{') {
-                st.pop();
-            } else {
-                return false;
-            }
+            st.push(c);
         }
         return st.empty();
     }
@@ -90,4 +86,5 @@ int main() {
     cout << Solution().isValid(s) << '\n';
     cout << Solution2().isValid(s) << '\n';
     cout << Solution3().isValid(s) << '\n';
+    return 0;
 }

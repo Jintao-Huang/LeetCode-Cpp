@@ -1,13 +1,15 @@
 
 
-#ifndef _LEETCODE_ALG_SEARCH_H
-#define _LEETCODE_ALG_SEARCH_H 1
+#ifndef _ALG_SEARCH_H
+#define _ALG_SEARCH_H 1
 
 #include <_types.h>
 
 namespace leetcode {
 
-inline int get_mid(int lo, int hi) { return ((hi - lo) >> 1) + lo; }
+inline int get_mid(int lo, int hi) {
+    return ((hi - lo) >> 1) + lo;  // 避免int溢出
+}
 
 template <typename Tp>
 int binary_search_lc(const vector<Tp> &nums, int x, int lo = 0, int hi = -1) {
@@ -18,7 +20,7 @@ int binary_search_lc(const vector<Tp> &nums, int x, int lo = 0, int hi = -1) {
     --hi;
     //
     while (lo <= hi) {
-        int mid = get_mid(lo, hi);  // 避免int溢出
+        int mid = get_mid(lo, hi);
         if (nums[mid] > x) {
             hi = mid - 1;
         } else if (nums[mid] < x) {
@@ -62,7 +64,7 @@ inline int bisect_left(const vector<Tp> &nums, const Tp &x, int lo = 0, int hi =
     if (hi == -1) {
         hi = nums.size();
     }
-    return lower_bound_lc(lo, hi, [&nums, x](int mid) { return nums[mid] >= x; });
+    return lower_bound_lc(lo, hi, [&nums, x](int mid) -> bool { return nums[mid] >= x; });
 }
 
 template <typename Tp>
@@ -71,7 +73,7 @@ inline int bisect_right(const vector<Tp> &nums, const Tp &x, int lo = 0, int hi 
     if (hi == -1) {
         hi = nums.size();
     }
-    return lower_bound_lc(lo, hi, [&nums, x](int mid) { return nums[mid] > x; });
+    return lower_bound_lc(lo, hi, [&nums, x](int mid) -> bool { return nums[mid] > x; });
 }
 
 }  // namespace leetcode

@@ -1,6 +1,6 @@
 // #include <bits/stdc++.h>
-#ifndef _LEETCODE_TYPES_H
-#define _LEETCODE_TYPES_H 1
+#ifndef _TYPES_H
+#define _TYPES_H 1
 // copy from <bits/stdc++.h>
 
 // C
@@ -87,8 +87,8 @@
 #include <system_error>
 #include <thread>
 #include <tuple>
-#include <typeindex>
 #include <type_traits>
+#include <typeindex>
 #include <unordered_map>
 #include <unordered_set>
 #endif
@@ -102,8 +102,8 @@
 #include <charconv>
 // #include <execution>
 #include <filesystem>
-#include <optional>
 #include <memory_resource>
+#include <optional>
 #include <string_view>
 #include <variant>
 #endif
@@ -114,18 +114,26 @@
 #include <compare>
 #include <concepts>
 #if __cpp_impl_coroutine
-# include <coroutine>
+#include <coroutine>
 #endif
 #include <latch>
 #include <numbers>
 #include <ranges>
-#include <span>
-#include <stop_token>
 #include <semaphore>
 #include <source_location>
+#include <span>
+#include <stop_token>
 #include <syncstream>
 #include <version>
 #endif
 //
+namespace leetcode {
 using namespace std;
+}
+namespace mini_stl {
+using namespace std;
+}
+namespace ml {
+using namespace std;
+}
 #endif

@@ -1,5 +1,5 @@
-#ifndef _LEETCODE_ALG_ARRAY_H
-#define _LEETCODE_ALG_ARRAY_H 1
+#ifndef _ALG_ARRAY_H
+#define _ALG_ARRAY_H 1
 
 #include <_types.h>
 
@@ -21,37 +21,20 @@ inline int manhattan_dist(Tp x, Tp y, Tp x2, Tp y2) {
     return abs(d) + abs(d2);
 }
 
-template <typename T>
-void _partial_sum_lc(const vector<T>& nums, vector<T>& res, optional<T> init_val = nullopt,
-                     function<T(T, T)> binary_op = plus<>()) {
-    int n = nums.size();
-    typename vector<T>::const_iterator it = nums.cbegin();
-    if (!init_val.has_value()) {
-        if (n == 0) {
-            return;
-        }
-        init_val = *(it++);
+template <typename Tp, typename BinaryOperation = plus<Tp>>
+void partial_sum_lc(const vector<Tp>& nums, vector<Tp>& res,
+                     BinaryOperation binary_op = BinaryOperation()) {
+    typename vector<Tp>::const_iterator first = nums.begin(), last = nums.end();
+    if (first == last){
+        return;
     }
-    res.push_back(init_val.value());
-    for (; it != nums.end(); ++it) {
-        res.push_back(binary_op(res.back(), *it));
+    if (res.empty()){
+        res.push_back(*first++);
+    }
+    while(first != last) {
+        res.push_back(binary_op(res.back(), *first++));
     }
 }
-
-template <typename Tp>
-void partial_sum_lc(const vector<Tp>& nums, vector<Tp>& res) {
-    return _partial_sum_lc<Tp>(nums, res);
-}
-template <typename Tp>
-void partial_sum_lc(const vector<Tp>& nums, vector<Tp>& res, Tp init_val) {
-    return _partial_sum_lc<Tp>(nums, res, init_val);
-}
-template <typename Tp, typename BinaryOperation>
-void partial_sum_lc(const vector<Tp>& nums, vector<Tp>& res, Tp init_val,
-                    BinaryOperation binary_op) {
-    return _partial_sum_lc<Tp>(nums, res, init_val, binary_op);
-}
-
 }  // namespace leetcode
 
 #endif

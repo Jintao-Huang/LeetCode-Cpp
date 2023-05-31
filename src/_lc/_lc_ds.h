@@ -1,5 +1,5 @@
-#ifndef _LEETCODE_LC_DS_H
-#define _LEETCODE_LC_DS_H 1
+#ifndef _LC_DS_H
+#define _LC_DS_H 1
 
 #include <_types.h>
 namespace leetcode {

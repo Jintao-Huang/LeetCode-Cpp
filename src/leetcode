@@ -1,6 +1,7 @@
-#ifndef _LEETCODE_H
-#define _LEETCODE_H 1
+#ifndef _LEETCODE
+#define _LEETCODE 1
 
+// common
 #include <_io.h>
 #include <_types.h>
 
@@ -13,11 +14,13 @@
 // _lc
 #include <_lc/_lc_ds.h>
 #include <_lc/_lc_tools.h>
-// _stl
-#include <_stl/_algorithm.h>
+#include <_lc/_lc_io.h>
+// _mini_stl
+#include <_mini_stl/_algorithm.h>
+#include <_mini_stl/_functional.h>
+#include <_mini_stl/_numeric.h>
 // _ml
-#include <_ml/_utils.h>
 #include <_ml/_np.h>
+#include <_ml/_utils.h>
 
-using namespace leetcode;
 #endif

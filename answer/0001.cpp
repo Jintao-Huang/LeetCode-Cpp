@@ -1,5 +1,5 @@
 #include <leetcode>
-
+using namespace leetcode;
 class Solution {
    public:
     vector<int> twoSum(vector<int> &nums, int target) {
@@ -21,4 +21,5 @@ int main() {
     vector<int> nums = {2, 7, 11, 15};
     int target = 9;
     cout << Solution().twoSum(nums, target) << '\n';
+    return 0;
 }

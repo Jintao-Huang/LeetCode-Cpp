@@ -1,5 +1,5 @@
 #include <leetcode>
-
+using namespace leetcode;
 class Solution {
    public:
     vector<vector<int>> levelOrder(TreeNode *root) {
@@ -31,8 +31,7 @@ class Solution {
 int main() {
     vector<optional<int>> v = {3, 9, 20, nullopt, nullopt, 15, 7};
     TreeNode *root = to_tree(v);
-    v.clear();
-    from_tree(root, v);
-    cout << v << '\n';
+    cout << root << '\n';
     cout << Solution().levelOrder(root) << '\n';
+    return 0;
 }

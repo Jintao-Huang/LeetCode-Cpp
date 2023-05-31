@@ -104,6 +104,7 @@
         "ios": "cpp",
         "locale": "cpp",
         "leetcode": "cpp",
-        "strstream": "cpp"
+        "strstream": "cpp",
+        "climits": "cpp"
     }
 }
