@@ -18,7 +18,7 @@
 1. examples: run answer/0001.cpp
     ```bash
     # 使用ubuntu, g++
-    bash run.sh
+    bash run.sh answer/0001.cpp
     ```
 
 2. use leetcode库

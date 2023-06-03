@@ -1,23 +1,15 @@
 
 #ifndef _MINI_STL_ALGORITHM_H
 #define _MINI_STL_ALGORITHM_H 1
-#include <_types.h>
 
-/// 这里不进行move优化. (作者太菜了, 看stl看的脑壳痛)
 namespace mini_stl {
-
-template <typename InputIterator, typename OutputIterator>
-OutputIterator partial_sum(InputIterator first, InputIterator last, OutputIterator res) {
-    return partial_sum(first, last, res, plus<>());
-}
-
 template <typename InputIterator, typename OutputIterator, typename BinaryOperation>
 OutputIterator partial_sum(InputIterator first, InputIterator last, OutputIterator res,
                            BinaryOperation binary_op) {
     if (first == last) {
         return res;
     }
-    typename iterator_traits<InputIterator>::value_type val = *first;
+    typename std::iterator_traits<InputIterator>::value_type val = *first;
     *res = val;
     while (++first != last) {
         val = binary_op(val, *first);
@@ -25,7 +17,13 @@ OutputIterator partial_sum(InputIterator first, InputIterator last, OutputIterat
     }
     return ++res;
 }
-// 
+
+template <typename InputIterator, typename OutputIterator>
+inline OutputIterator partial_sum(InputIterator first, InputIterator last, OutputIterator res) {
+    return mini_stl::partial_sum(first, last, res, std::plus<>());
+}
+
+//
 template <typename InputIterator, typename OutputIterator>
 OutputIterator copy(InputIterator first, InputIterator last, OutputIterator res) {
     while (first != last) {
@@ -35,10 +33,10 @@ OutputIterator copy(InputIterator first, InputIterator last, OutputIterator res)
 }
 
 template <typename InputIterator, typename Predicate>
-typename iterator_traits<InputIterator>::difference_type count_if(InputIterator first,
-                                                                  InputIterator last,
-                                                                  Predicate pred) {
-    typename iterator_traits<InputIterator>::difference_type res = 0;
+typename std::iterator_traits<InputIterator>::difference_type count_if(InputIterator first,
+                                                                       InputIterator last,
+                                                                       Predicate pred) {
+    typename std::iterator_traits<InputIterator>::difference_type res = 0;
     while (first != last) {
         if (pred(*first++)) {
             ++res;
@@ -48,10 +46,10 @@ typename iterator_traits<InputIterator>::difference_type count_if(InputIterator 
 }
 
 template <typename InputIterator, typename Tp>
-inline typename iterator_traits<InputIterator>::difference_type count(InputIterator first,
-                                                                      InputIterator last,
-                                                                      const Tp& val) {
-    return mini_stl::count_if(first, last, bind(equal_to<>(), placeholders::_1, val));
+inline typename std::iterator_traits<InputIterator>::difference_type count(InputIterator first,
+                                                                           InputIterator last,
+                                                                           const Tp& val) {
+    return mini_stl::count_if(first, last, std::bind(std::equal_to<>(), std::placeholders::_1, val));
 }
 
 }  // namespace mini_stl

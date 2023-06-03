@@ -1,5 +1,6 @@
-#include <leetcode>
-using namespace leetcode;
+#include <ml>
+using namespace std;
+
 int main() {
     vector<int> v = {1, 2, 3}, v2(v.size());
     partial_sum(v.begin(), v.end(), v2.begin());

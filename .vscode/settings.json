@@ -105,6 +105,9 @@
         "locale": "cpp",
         "leetcode": "cpp",
         "strstream": "cpp",
-        "climits": "cpp"
+        "climits": "cpp",
+        "queue": "cpp",
+        "stack": "cpp",
+        "ml": "cpp"
     }
 }

@@ -5,3 +5,4 @@ __pycache__/
 /_todo
 /.vscode/launch.json
 *.out
+/_pass_test.txt

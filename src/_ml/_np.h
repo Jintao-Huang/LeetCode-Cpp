@@ -11,7 +11,7 @@ inline typename Sequence::value_type sum(const Sequence &nums) {
 
 template <typename Sequence>
 inline double mean(const Sequence &nums) {
-    double res = static_cast<double>(sum(nums));
+    double res = static_cast<double>(ml::sum(nums));
     return res / nums.size();
 }
 
@@ -29,7 +29,7 @@ template <typename Sequence>
 inline double var(const Sequence &nums) {
     // mean((x - mean) * (x - mean))
     typedef typename Sequence::value_type Tp;
-    double mean_ = mean(nums);
+    double mean_ = ml::mean(nums);
     function<double(double, Tp)> binary_op = [mean_](double x, Tp y) -> double {
         return x + (y - mean_) * (y - mean_);
     };
@@ -39,7 +39,7 @@ inline double var(const Sequence &nums) {
 
 template <typename Sequence>
 inline double std(const Sequence &nums) {
-    return sqrt(var(nums));
+    return sqrt(ml::var(nums));
 }
 
 }  // namespace ml
