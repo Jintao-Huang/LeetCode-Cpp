@@ -3,6 +3,7 @@
 // C
 #include <climits>
 #include <cmath>
+#include <cstdint>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -23,18 +24,19 @@
 #include <string>
 #include <utility>
 #include <vector>
-// 
+//
 #include <array>
 #include <chrono>
 #include <forward_list>
 #include <initializer_list>
+#include <optional>
 #include <tuple>
 #include <type_traits>
 #include <unordered_map>
 #include <unordered_set>
-#include <optional>
 //
 #include <iomanip>
+#include <sstream>
 
 //
 namespace leetcode {

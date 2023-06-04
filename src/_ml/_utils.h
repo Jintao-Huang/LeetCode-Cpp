@@ -16,7 +16,7 @@ struct StatData {
         : mean(mean), std(std), min(min), max(max), len(len) {}
 
     friend inline ostream& operator<<(ostream& out, StatData stat_data) {
-        out << setprecision(6) << fixed;
+        out << fixed;
         out << stat_data.mean << "±" << stat_data.std;
         out << ", min=" << stat_data.min << ", max=" << stat_data.max << ", len=" << stat_data.len;
         // recover

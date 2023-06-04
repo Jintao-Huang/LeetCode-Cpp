@@ -4,8 +4,14 @@
 
 namespace std {
 template <typename InputIterator>
-ostream &print(InputIterator first, InputIterator last, ostream &out);
+ostream &print(InputIterator first, InputIterator last, ostream &out = cout);
 //
+
+template <typename InputIterator>
+inline ostream &println(InputIterator first, InputIterator last, ostream &out = cout){
+    return print(first, last, out) << '\n';
+}
+
 template <typename Tp>
 inline ostream &operator<<(ostream &out, const vector<Tp> &v) {
     return print(v.begin(), v.end(), out);
@@ -53,7 +59,7 @@ template <typename Tp, typename Sequence>
 inline ostream &operator<<(ostream &out, const queue<Tp, Sequence> &q) {
     queue<Tp, Sequence> temp(q);
     vector<Tp> v(q.size());
-    for (typename vector<Tp>::iterator it; it != v.end(); ++it) {
+    for (typename vector<Tp>::iterator it = v.begin(); it != v.end(); ++it) {
         *it = move(temp.front());
         temp.pop();  // first
     }
