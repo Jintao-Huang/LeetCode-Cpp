@@ -1,30 +1,32 @@
 #include <leetcode>
 using namespace leetcode;
+
+/// 递归法
 class Solution {
    public:
-    void _inorderTraversal(TreeNode *root, vector<int> &res) {
-        if (root == nullptr) {
-            return;
-        }
-        _inorderTraversal(root->left, res);
-        res.push_back(root->val);
-        _inorderTraversal(root->right, res);
-    }
     inline vector<int> inorderTraversal(TreeNode *root) {
         vector<int> res;
-        _inorderTraversal(root, res);
+        res.reserve(105);
+        inorder_traversal(root, res);
         return res;
     }
 };
 
-/// TODO: 迭代法
-class Solution2 {};
+/// 迭代法
+class Solution2 {
+   public:
+    inline vector<int> inorderTraversal(TreeNode *root) {
+        vector<int> res;
+        res.reserve(105);
+        inorder_traversal2(root, res);
+        return res;
+    }
+};
 
 int main() {
-    vector<optional<int>> v = {1, nullopt, 2, 3};
-    cout << v << '\n';
-    TreeNode *root = to_tree(v);
+    TreeNode *root = to_tree({1, nullopt, 2, 3});
     cout << root << '\n';
     cout << Solution().inorderTraversal(root) << '\n';
+    cout << Solution2().inorderTraversal(root) << '\n';
     return 0;
 }

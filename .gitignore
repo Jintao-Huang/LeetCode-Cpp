@@ -3,6 +3,5 @@
 /.pytest_cache
 __pycache__/
 /_todo
-/.vscode/launch.json
 *.out
 /_pass_test.txt

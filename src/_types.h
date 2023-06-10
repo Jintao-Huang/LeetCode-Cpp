@@ -1,6 +1,8 @@
 #ifndef _TYPES_H
 #define _TYPES_H 1
 // C
+#include <cassert>
+#include <cctype>
 #include <climits>
 #include <cmath>
 #include <cstdint>

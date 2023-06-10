@@ -2,7 +2,7 @@
 using namespace leetcode;
 class Solution {
    public:
-    int minEatingSpeed(vector<int>& piles, int h) {
+    int minEatingSpeed(const vector<int>& piles, int h) {
         function<bool(int)> is_valid = [&piles, h](int mid) -> bool{
             int s = 0;
             double mid_d = static_cast<double>(mid);

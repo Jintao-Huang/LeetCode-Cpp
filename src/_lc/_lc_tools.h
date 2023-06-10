@@ -15,7 +15,7 @@ ListNode *to_linkedlist(const vector<int> &v) {
 }
 
 void from_linkedlist(ListNode *head, vector<int> &res) {
-    while (head != nullptr) {
+    while (head) {
         res.push_back(head->val);
         head = head->next;
     }
@@ -59,7 +59,7 @@ TreeNode *to_tree(const vector<optional<int>> &v) {
 }
 
 void from_tree(TreeNode *root, vector<optional<int>> &res) {
-    if (root == nullptr) {
+    if (!root) {
         return;
     }
     deque<TreeNode *> dq = {root};
@@ -67,18 +67,18 @@ void from_tree(TreeNode *root, vector<optional<int>> &res) {
     while (!dq.empty()) {
         TreeNode *parent = dq.front(), *lc = parent->left, *rc = parent->right;
         dq.pop_front();
-        if (lc == nullptr) {
-            res.push_back(nullopt);
-        } else {
+        if (lc) {
             dq.push_back(lc);
             res.push_back(lc->val);
+        } else {
+            res.push_back(nullopt);
         }
         //
-        if (rc == nullptr) {
-            res.push_back(nullopt);
-        } else {
+        if (rc) {
             dq.push_back(rc);
             res.push_back(rc->val);
+        } else {
+            res.push_back(nullopt);
         }
     }
     while (!res.back().has_value()) {

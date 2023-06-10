@@ -23,18 +23,82 @@ inline int manhattan_dist(Tp x, Tp y, Tp x2, Tp y2) {
 
 template <typename Tp, typename BinaryOperation = plus<Tp>>
 void partial_sum_lc(const vector<Tp>& nums, vector<Tp>& res,
-                     BinaryOperation binary_op = BinaryOperation()) {
+                    BinaryOperation binary_op = BinaryOperation()) {
     typename vector<Tp>::const_iterator first = nums.begin(), last = nums.end();
-    if (first == last){
+    if (first == last) {
         return;
     }
-    if (res.empty()){
+    if (res.empty()) {
         res.push_back(*first++);
     }
-    while(first != last) {
+    while (first != last) {
         res.push_back(binary_op(res.back(), *first++));
     }
 }
+
+bool bracket_matching(const string& s) {
+    vector<char> st;
+    int n = s.size();
+    st.reserve(n);
+    for (int i = 0; i < n; ++i) {
+        char c = s[i];
+        //
+        if (c == ')' || c == ']' || c == '}') {
+            if (st.empty()) {
+                return false;
+            }
+            //
+            if (c == ')' && st.back() != '(' || c == ']' && st.back() != '[' ||
+                c == '}' && st.back() != '{') {
+                return false;
+            }
+            st.pop_back();
+            continue;
+        }
+        //
+        st.push_back(c);
+    }
+    return st.empty();
+}
+
+void two_sum(const vector<int>& nums, int target, vector<int>& res) {
+    // res. start from 0.
+    unordered_map<int, int> mapper;
+    int n = nums.size();
+    mapper.reserve(n);
+    for (int i = 0; i < n; ++i) {
+        int x = nums[i], tmx = target - x;  // minus
+        if (mapper.count(tmx)) {
+            res.resize(2);
+            res[0] = mapper[tmx];
+            res[1] = i;
+            return;
+        }
+        //
+        mapper[x] = i;
+    }
+}
+
+int get_vv_size(const vector<vector<int>>& vv) {
+    int n = vv.size();
+    int size = 0;
+    for (int i = 0; i < n; ++i) {
+        size += vv[i].size();
+    }
+    return size;
+}
+
+void flatten_vector(const vector<vector<int>>& vv, vector<int>& res) {
+    int n = vv.size();
+    for (int i = 0; i < n; ++i) {
+        const vector<int>& v = vv[i];
+        int m = v.size();
+        for (int j = 0; j < m; ++j) {
+            res.push_back(v[j]);
+        }
+    }
+}
+
 }  // namespace leetcode
 
 #endif

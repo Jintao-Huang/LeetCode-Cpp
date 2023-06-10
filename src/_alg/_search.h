@@ -1,5 +1,3 @@
-
-
 #ifndef _ALG_SEARCH_H
 #define _ALG_SEARCH_H 1
 

@@ -1,19 +1,12 @@
 #include <leetcode>
 using namespace leetcode;
+
 class Solution {
    public:
-    vector<int> twoSum(vector<int> &nums, int target) {
-        unordered_map<int, int> mapper;
-        int n = nums.size();
-        for (int i = 0; i < n; ++i) {
-            int x = nums[i], tmx = target - x;  // minus
-            if (mapper.count(tmx)) {
-                return {mapper[tmx], i};
-            }
-            //
-            mapper[x] = i;
-        }
-        return {};
+    inline vector<int> twoSum(vector<int> &nums, int target) {
+        vector<int> res;
+        two_sum(nums, target, res);
+        return res;
     }
 };
 

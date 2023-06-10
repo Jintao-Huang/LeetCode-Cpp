@@ -7,12 +7,14 @@
 
 // _alg
 #include <_alg/_array.h>
+#include <_alg/_linkedlist.h>
 #include <_alg/_search.h>
+#include <_alg/_tree.h>
 
 // _ds
 
 // _lc
 #include <_lc/_lc_ds.h>
-#include <_lc/_lc_tools.h>
 #include <_lc/_lc_io.h>
+#include <_lc/_lc_tools.h>
 #endif
