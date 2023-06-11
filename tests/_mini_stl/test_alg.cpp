@@ -58,25 +58,25 @@ int main() {
     }
     // test partition
     {
-        vector<int> v = {5, 1, 2, 3, 6, 7, 4};
-        vector<int>::iterator it =
-            partition(v.begin(), --v.end(), bind(less<>(), placeholders::_1, v.back()));
-        cout << it - v.begin() << '\n';
-        cout << v << '\n';
-    }
-    {
-        vector<int> v = {5, 1, 2, 3, 6, 7, 4};
-        vector<int>::iterator it =
-            mini_stl::partition(v.begin(), --v.end(), bind(less<>(), placeholders::_1, v.back()));
-        cout << it - v.begin() << '\n';
-        cout << v << '\n';
-    }
-    {
         list<int> v = {5, 1, 2, 3, 6, 7, 4};
         list<int>::iterator it =
-            mini_stl::partition(v.begin(), --v.end(), bind(less<>(), placeholders::_1, v.back()));
+            partition(v.begin(), --v.end(), bind(less<>(), placeholders::_1, v.back()));
         cout << distance(v.begin(), it) << '\n';
         cout << v << '\n';
+    }
+    {
+        list<int> l = {5, 1, 2, 3, 6, 7, 4};
+        list<int>::iterator it =
+            mini_stl::partition(l.begin(), --l.end(), bind(less<>(), placeholders::_1, l.back()));
+        cout << distance(l.begin(), it) << '\n';
+        cout << l << '\n';
+    }
+    {
+        forward_list<int> fl = {5, 1, 2, 3, 6, 7, 4};
+        forward_list<int>::iterator it =
+            mini_stl::partition(fl.begin(), fl.end(), bind(less<>(), placeholders::_1, 4));
+        cout << distance(fl.begin(), it) << '\n';
+        cout << fl << '\n';
     }
 
     return 0;

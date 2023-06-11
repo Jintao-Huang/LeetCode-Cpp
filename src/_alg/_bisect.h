@@ -7,6 +7,8 @@ namespace leetcode {
 
 template <typename Tp>  // long long, int, RandomIterator
 inline Tp get_mid(Tp lo, Tp hi) {
+    // [lo..hi], 选择偏lo. [1, 2]选择1
+    // [lo..hi), 选择偏hi. [1, 2]选择2
     return lo + ((hi - lo) >> 1);
 }
 

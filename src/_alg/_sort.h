@@ -9,22 +9,57 @@ random_device __rd;
 default_random_engine __gen(__rd());
 inline int gen_randint(int lo, int hi) { return uniform_int_distribution<>(lo, --hi)(__gen); }
 
+template <typename BiIterator, typename Tp>
+pair<BiIterator, BiIterator> three_way_partition(BiIterator first, BiIterator last, Tp val) {
+    BiIterator it = first;
+    while (it != last) {
+        if (*it > val) {
+            while (*--last > val) {
+                if (it == last) {
+                    return {first, last};
+                }
+            }
+            iter_swap(it, last);
+        } else if (*it < val) {
+            iter_swap(first, it);
+            ++first;
+            ++it;
+        } else {
+            ++it;
+        }
+    }
+    return {first, last};
+}
+
 template <typename RandomIterator>
 void quick_sort(RandomIterator first, RandomIterator last) {
-    // [lo..hi)
-    typedef typename RandomIterator::value_type value_type;
     if (last - first <= 1) {
         return;
     }
     auto _last_m1 = last - 1;
-    // 避免最坏复杂度. 也可以取mid.
+    // 随机数优化
     iter_swap(first + gen_randint(0, last - first), _last_m1);
+    // iter_swap(get_mid(first, _last_m1), _last_m1);  // 也可以取mid.
+    // 三路partition优化
+    auto [pivot, pivot2] = three_way_partition(first, last, *_last_m1);
+    quick_sort(first, pivot);
+    quick_sort(pivot2, last);
+}
+
+template <typename RandomIterator>
+void quick_sort2(RandomIterator first, RandomIterator last) {
+    // 负面案例: 没有随机数优化[1, 2, 3, 4...顺序/逆序] O(n^2)
+    //   没有三路partition优化([2, 2, 2, 2, ...相同元素] O(n^2)).
+    if (last - first <= 1) {
+        return;
+    }
+    auto _last_m1 = last - 1;
     // partition的实现见mini_stl
     RandomIterator pivot = partition(
-        first, _last_m1, bind<>(less<>(), placeholders::_1, *(_last_m1)));  // hi-1一定不满足pred
+        first, _last_m1, bind<>(less<>(), placeholders::_1, *_last_m1));  // _last_m1一定不满足pred
     iter_swap(pivot, _last_m1);
-    quick_sort(first, pivot);
-    quick_sort(pivot + 1, last);
+    quick_sort2(first, pivot);
+    quick_sort2(pivot + 1, last);
 }
 
 template <typename RandomIterator>

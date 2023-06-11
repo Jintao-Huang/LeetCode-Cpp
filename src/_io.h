@@ -27,6 +27,10 @@ inline ostream &operator<<(ostream &out, const deque<Tp> &dq) {
     return print(dq.begin(), dq.end(), out);
 }
 template <typename Tp>
+inline ostream &operator<<(ostream &out, const forward_list<Tp> &l) {
+    return print(l.begin(), l.end(), out);
+}
+template <typename Tp>
 inline ostream &operator<<(ostream &out, const list<Tp> &l) {
     return print(l.begin(), l.end(), out);
 }

@@ -95,7 +95,7 @@ ForwardIterator _partition(ForwardIterator first, ForwardIterator last, Predicat
 }
 
 template <typename BiIterator, typename Predicate>
-BiIterator _partition2(BiIterator first, BiIterator last, Predicate pred,
+BiIterator _partition(BiIterator first, BiIterator last, Predicate pred,
                        std::bidirectional_iterator_tag) {
     // first之前的元素满足pred. first及其之后的元素不满足pred.
     while (true) {
