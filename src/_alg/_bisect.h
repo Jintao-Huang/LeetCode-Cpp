@@ -12,32 +12,29 @@ inline Tp get_mid(Tp lo, Tp hi) {
     return lo + ((hi - lo) >> 1);
 }
 
-template <typename Tp>
-int binary_search_lc(const vector<Tp> &nums, int x, int lo = 0, int hi = -1) {
-    // res范围: [lo..hi)
-    if (hi == -1) {
-        hi = nums.size();
-    }
-    --hi;
-    //
-    while (lo <= hi) {
-        int mid = get_mid(lo, hi);
-        if (nums[mid] > x) {
-            hi = mid - 1;
-        } else if (nums[mid] < x) {
-            lo = mid + 1;
+template <typename RandomIterator, typename Tp>
+RandomIterator binary_search_lc(RandomIterator first, RandomIterator last, Tp x) {
+    RandomIterator _not_found = last;
+    --last;
+    while (first <= last) {
+        RandomIterator mid = get_mid(first, last);
+        if (*mid > x) {
+            last = mid - 1;
+        } else if (*mid < x) {
+            first = mid + 1;
         } else {
             return mid;
         }
     }
-    return -1;
+    return _not_found;
 }
 
-int lower_bound_lc(int lo, int hi, function<bool(int)> unary_pred) {
-    // 满足unary_pred的最小idx. [lo..hi]是res范围
+template <typename Tp, typename Predicate>
+Tp lower_bound_lc(Tp lo, Tp hi, Predicate pred) {
+    // 满足pred的最小idx. [lo..hi]是res范围
     while (lo < hi) {
-        int mid = get_mid(lo, hi);
-        if (unary_pred(mid)) {
+        Tp mid = get_mid(lo, hi);
+        if (pred(mid)) {
             hi = mid;
         } else {
             lo = mid + 1;
@@ -46,11 +43,12 @@ int lower_bound_lc(int lo, int hi, function<bool(int)> unary_pred) {
     return lo;
 }
 
-int upper_bound_lc(int lo, int hi, function<bool(int)> unary_pred) {
-    // 满足unary_pred的最大idx. [lo..hi]是res范围
+template <typename Tp, typename Predicate>  // Tp: int, RandomIterator
+Tp upper_bound_lc(Tp lo, Tp hi, Predicate pred) {
+    // 满足pred的最大idx. [lo..hi]是res范围
     while (lo < hi) {
-        int mid = get_mid(lo, hi + 1);
-        if (unary_pred(mid)) {
+        Tp mid = get_mid(lo, hi + 1);
+        if (pred(mid)) {
             lo = mid;
         } else {
             hi = mid - 1;
@@ -59,22 +57,14 @@ int upper_bound_lc(int lo, int hi, function<bool(int)> unary_pred) {
     return lo;
 }
 
-template <typename Tp>
-inline int bisect_left(const vector<Tp> &nums, const Tp &x, int lo = 0, int hi = -1) {
-    // [lo..hi]是res范围. [lo..hi)
-    if (hi == -1) {
-        hi = nums.size();
-    }
-    return lower_bound_lc(lo, hi, [&nums, x](int mid) -> bool { return nums[mid] >= x; });
+template <typename RandomIterator, typename Tp>
+inline RandomIterator bisect_left(RandomIterator first, RandomIterator last, Tp x) {
+    return lower_bound_lc(first, last, [x](RandomIterator mid) -> bool { return *mid >= x; });
 }
 
-template <typename Tp>
-inline int bisect_right(const vector<Tp> &nums, const Tp &x, int lo = 0, int hi = -1) {
-    // [lo..hi]是res范围. [lo..hi)
-    if (hi == -1) {
-        hi = nums.size();
-    }
-    return lower_bound_lc(lo, hi, [&nums, x](int mid) -> bool { return nums[mid] > x; });
+template <typename RandomIterator, typename Tp>
+inline RandomIterator bisect_right(RandomIterator first, RandomIterator last, Tp x) {
+    return lower_bound_lc(first, last, [x](RandomIterator mid) -> bool { return *mid > x; });
 }
 
 }  // namespace leetcode

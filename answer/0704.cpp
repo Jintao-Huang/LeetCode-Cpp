@@ -14,7 +14,14 @@ class Solution {
 
 class Solution2 {
    public:
-    inline int search(vector<int> &nums, int target) { return binary_search_lc(nums, target); }
+    inline int search(vector<int> &nums, int target) {
+        auto it = binary_search_lc(nums.begin(), nums.end(), target);
+        if (it == nums.end()) {
+            return -1;
+        } else {
+            return it - nums.begin();
+        }
+    }
 };
 
 int main() {

@@ -11,6 +11,7 @@ inline int gen_randint(int lo, int hi) { return uniform_int_distribution<>(lo, -
 
 template <typename BiIterator, typename Tp>
 pair<BiIterator, BiIterator> three_way_partition(BiIterator first, BiIterator last, Tp val) {
+    // partition实现见mini_stl
     BiIterator it = first;
     while (it != last) {
         if (*it > val) {
@@ -54,7 +55,6 @@ void quick_sort2(RandomIterator first, RandomIterator last) {
         return;
     }
     auto _last_m1 = last - 1;
-    // partition的实现见mini_stl
     RandomIterator pivot = partition(
         first, _last_m1, bind<>(less<>(), placeholders::_1, *_last_m1));  // _last_m1一定不满足pred
     iter_swap(pivot, _last_m1);
