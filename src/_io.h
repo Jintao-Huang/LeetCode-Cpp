@@ -65,7 +65,7 @@ inline ostream &operator<<(ostream &out, const queue<Tp, Sequence> &q) {
     vector<Tp> v(q.size());
     for (typename vector<Tp>::iterator it = v.begin(); it != v.end(); ++it) {
         *it = move(temp.front());
-        temp.pop();  // first
+        temp.pop();
     }
     return out << v;
 }

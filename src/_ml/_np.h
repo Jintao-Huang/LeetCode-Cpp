@@ -27,7 +27,7 @@ inline typename Sequence::value_type min(const Sequence &nums) {
 
 template <typename Sequence>
 inline double var(const Sequence &nums) {
-    // mean((x - mean) * (x - mean))
+    /// mean((x - mean) * (x - mean))
     typedef typename Sequence::value_type Tp;
     double mean_ = ml::mean(nums);
     function<double(double, Tp)> binary_op = [mean_](double x, Tp y) -> double {

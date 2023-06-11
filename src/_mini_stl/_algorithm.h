@@ -73,7 +73,7 @@ OutputIterator merge(InputIterator1 first1, InputIterator1 last1, InputIterator2
 template <typename ForwardIterator, typename Predicate>
 ForwardIterator _partition(ForwardIterator first, ForwardIterator last, Predicate pred,
                            std::forward_iterator_tag) {
-    // first之前的元素满足pred. first及其之后的元素不满足pred.
+    /// first之前的元素满足pred. first及其之后的元素不满足pred.
     // 避免自己和自己swap的消耗
     if (first == last) {
         return first;
@@ -97,7 +97,7 @@ ForwardIterator _partition(ForwardIterator first, ForwardIterator last, Predicat
 template <typename BiIterator, typename Predicate>
 BiIterator _partition(BiIterator first, BiIterator last, Predicate pred,
                        std::bidirectional_iterator_tag) {
-    // first之前的元素满足pred. first及其之后的元素不满足pred.
+    /// first之前的元素满足pred. first及其之后的元素不满足pred.
     while (true) {
         while (true) {
             if (first == last) {

@@ -7,8 +7,8 @@ namespace leetcode {
 
 template <typename Tp>  // long long, int, RandomIterator
 inline Tp get_mid(Tp lo, Tp hi) {
-    // [lo..hi], 选择偏lo. [1, 2]选择1
-    // [lo..hi), 选择偏hi. [1, 2]选择2
+    /// [lo..hi], 选择偏lo. [1, 2]选择1
+    /// [lo..hi), 选择偏hi. [1, 2]选择2
     return lo + ((hi - lo) >> 1);
 }
 
@@ -31,7 +31,7 @@ RandomIterator binary_search_lc(RandomIterator first, RandomIterator last, Tp x)
 
 template <typename Tp, typename Predicate>
 Tp lower_bound_lc(Tp lo, Tp hi, Predicate pred) {
-    // 满足pred的最小idx. [lo..hi]是res范围
+    /// 满足pred的最小idx. [lo..hi]是res范围
     while (lo < hi) {
         Tp mid = get_mid(lo, hi);
         if (pred(mid)) {
@@ -45,7 +45,7 @@ Tp lower_bound_lc(Tp lo, Tp hi, Predicate pred) {
 
 template <typename Tp, typename Predicate>  // Tp: int, RandomIterator
 Tp upper_bound_lc(Tp lo, Tp hi, Predicate pred) {
-    // 满足pred的最大idx. [lo..hi]是res范围
+    ///满足pred的最大idx. [lo..hi]是res范围
     while (lo < hi) {
         Tp mid = get_mid(lo, hi + 1);
         if (pred(mid)) {

@@ -64,7 +64,7 @@ bool bracket_matching(const string& s) {
 }
 
 void two_sum(const vector<int>& nums, int target, vector<int>& res) {
-    // res. start from 0.
+    /// res. start from 0.
     unordered_map<int, int> mapper;
     int n = nums.size();
     mapper.reserve(n);

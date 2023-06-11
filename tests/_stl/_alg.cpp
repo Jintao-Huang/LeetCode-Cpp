@@ -6,7 +6,6 @@ int main() {
     // ref: https://cplusplus.com/reference/
     ///
     {
-        // pass
         vector<int> v = {1, 2, 3}, v2;
         partial_sum(v.begin(), v.end(), back_inserter(v2));
         cout << v2 << '\n';

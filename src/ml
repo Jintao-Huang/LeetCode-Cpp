@@ -1,8 +1,7 @@
 #ifndef _ML
 #define _ML 1
 // common
-#include <_io.h>
-#include <_types.h>
+#include <leetcode>
 
 // _mini_stl
 #include <_mini_stl/_algorithm.h>

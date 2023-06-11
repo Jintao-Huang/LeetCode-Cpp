@@ -11,7 +11,7 @@ inline int gen_randint(int lo, int hi) { return uniform_int_distribution<>(lo, -
 
 template <typename BiIterator, typename Tp>
 pair<BiIterator, BiIterator> three_way_partition(BiIterator first, BiIterator last, Tp val) {
-    // partition实现见mini_stl
+    /// partition实现见mini_stl
     BiIterator it = first;
     while (it != last) {
         if (*it > val) {
@@ -49,8 +49,8 @@ void quick_sort(RandomIterator first, RandomIterator last) {
 
 template <typename RandomIterator>
 void quick_sort2(RandomIterator first, RandomIterator last) {
-    // 负面案例: 没有随机数优化[1, 2, 3, 4...顺序/逆序] O(n^2)
-    //   没有三路partition优化([2, 2, 2, 2, ...相同元素] O(n^2)).
+    /// 反面案例: 没有随机数优化[1, 2, 3, 4...顺序/逆序] O(n^2)
+    ///   没有三路partition优化([2, 2, 2, 2, ...相同元素] O(n^2).
     if (last - first <= 1) {
         return;
     }
