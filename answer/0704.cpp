@@ -7,7 +7,7 @@ class Solution {
         if (it == nums.end() || *it != target) {
             return -1;
         } else {
-            return distance(nums.begin(), it);
+            return it - nums.begin();  // distance(nums.begin(), it);
         }
     }
 };

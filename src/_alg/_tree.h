@@ -51,22 +51,6 @@ void preorder_traversal2(TreeNode *root, vector<int> &res) {
     }
 }
 
-void inorder_traversal2(TreeNode *root, vector<int> &res) {
-    stack<TreeNode *> st;
-    TreeNode *cur_tn = root;
-    while (!st.empty() || cur_tn) {
-        if (cur_tn) {
-            st.push(cur_tn);
-            cur_tn = cur_tn->left;
-        } else {
-            cur_tn = st.top();
-            st.pop();
-            res.push_back(cur_tn->val);
-            cur_tn = cur_tn->right;
-        }
-    }
-}
-
 void postorder_traversal2(TreeNode *root, vector<int> &res) {
     if (!root) {
         return;
@@ -85,6 +69,62 @@ void postorder_traversal2(TreeNode *root, vector<int> &res) {
         }
     }
     reverse(res.begin(), res.end());
+}
+
+void preorder_traversal3(TreeNode *root, vector<int> &res) {
+    stack<TreeNode *> st;
+    TreeNode *cur_tn = root;
+    while (!st.empty() || cur_tn) {
+        if (cur_tn) {
+            res.push_back(cur_tn->val);
+            st.push(cur_tn);
+            cur_tn = cur_tn->left;
+        } else {
+            cur_tn = st.top();
+            st.pop();
+            cur_tn = cur_tn->right;
+        }
+    }
+}
+
+void inorder_traversal2(TreeNode *root, vector<int> &res) {
+    stack<TreeNode *> st;
+    TreeNode *cur_tn = root;
+    while (!st.empty() || cur_tn) {
+        if (cur_tn) {
+            st.push(cur_tn);
+            cur_tn = cur_tn->left;
+        } else {
+            cur_tn = st.top();
+            st.pop();
+            res.push_back(cur_tn->val);
+            cur_tn = cur_tn->right;
+        }
+    }
+}
+
+void postorder_traversal3(TreeNode *root, vector<int> &res) {
+    stack<TreeNode *> st;
+    TreeNode *cur_tn = root, *last_visited = nullptr;
+    while (!st.empty() || cur_tn) {
+        if (cur_tn) {
+            st.push(cur_tn);
+            // 访问lc
+            cur_tn = cur_tn->left;
+        } else {
+            // lc已访问
+            TreeNode *top_tn = st.top(), *_top_tn_right = top_tn->right;
+            if (!_top_tn_right || _top_tn_right == last_visited) {
+                // lc, rc已访问, 访问parent
+                res.push_back(top_tn->val);
+                st.pop();
+                last_visited = top_tn;
+            } else {
+                // 访问rc
+                cur_tn = _top_tn_right;
+            }
+        }
+    }
 }
 
 void level_order_traversal(TreeNode *root, vector<vector<int>> &res) {

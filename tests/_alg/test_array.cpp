@@ -20,14 +20,14 @@ int main() {
         cout << v2 << '\n';
     }
     {
-        vector<vector<int>> vv = {{
-                                      1,
-                                      2,
-                                      3,
-                                  },
-                                  {},
-                                  {4, 5}};
-        vector<int> res;
+        vector<vector<double>> vv = {{
+                                         1,
+                                         2,
+                                         3,
+                                     },
+                                     {},
+                                     {4, 5.3}};
+        vector<double> res;
         res.reserve(get_vv_size(vv));
         flatten_vector(vv, res);
         cout << res << '\n';

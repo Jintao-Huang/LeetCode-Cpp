@@ -7,8 +7,9 @@
 
 // _alg
 #include <_alg/_array.h>
+#include <_alg/_bisect.h>
 #include <_alg/_linkedlist.h>
-#include <_alg/_search.h>
+#include <_alg/_sort.h>
 #include <_alg/_tree.h>
 
 // _ds

@@ -29,10 +29,12 @@ void partial_sum_lc(const vector<Tp>& nums, vector<Tp>& res,
         return;
     }
     if (res.empty()) {
-        res.push_back(*first++);
+        res.push_back(*first);
+        ++first;
     }
     while (first != last) {
-        res.push_back(binary_op(res.back(), *first++));
+        res.push_back(binary_op(res.back(), *first));
+        ++first;
     }
 }
 
@@ -79,7 +81,8 @@ void two_sum(const vector<int>& nums, int target, vector<int>& res) {
     }
 }
 
-int get_vv_size(const vector<vector<int>>& vv) {
+template <typename Tp>
+int get_vv_size(const vector<vector<Tp>>& vv) {
     int n = vv.size();
     int size = 0;
     for (int i = 0; i < n; ++i) {
@@ -88,10 +91,11 @@ int get_vv_size(const vector<vector<int>>& vv) {
     return size;
 }
 
-void flatten_vector(const vector<vector<int>>& vv, vector<int>& res) {
+template <typename Tp>
+void flatten_vector(const vector<vector<Tp>>& vv, vector<Tp>& res) {
     int n = vv.size();
     for (int i = 0; i < n; ++i) {
-        const vector<int>& v = vv[i];
+        const vector<Tp>& v = vv[i];
         int m = v.size();
         for (int j = 0; j < m; ++j) {
             res.push_back(v[j]);

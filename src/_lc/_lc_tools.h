@@ -37,23 +37,23 @@ TreeNode *to_tree(const vector<optional<int>> &v) {
             break;
         }
         const optional<int> &lc_x = v[i];
+        ++i;
         if (lc_x.has_value()) {
             TreeNode *lc = new TreeNode(lc_x.value());
             dq.push_back(lc);
             parent->left = lc;
         }
-        ++i;
         //
         if (i >= n) {
             break;
         }
         const optional<int> &rc_x = v[i];
+        ++i;
         if (rc_x.has_value()) {
             TreeNode *rc = new TreeNode(rc_x.value());
             dq.push_back(rc);
             parent->right = rc;
         }
-        ++i;
     }
     return root;
 }

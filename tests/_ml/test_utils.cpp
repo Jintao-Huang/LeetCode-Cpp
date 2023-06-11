@@ -5,7 +5,7 @@ int main() {
     vector<int> v(N);
     auto it = v.begin() + 100;
     fill(v.begin(), it, 10);
-    
+    // print(v.begin(), it) << '\n';
     println(v.begin(), it);
     // print(v.data())
     ml::test_time([&v]() { fill(v.begin(), v.end(), 0); }, 10, 0);

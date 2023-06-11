@@ -7,6 +7,7 @@
 // _mini_stl
 #include <_mini_stl/_algorithm.h>
 #include <_mini_stl/_functional.h>
+#include <_mini_stl/_iterator.h>
 #include <_mini_stl/_numeric.h>
 #include <_mini_stl/_type_traits.h>
 #include <_mini_stl/_utility.h>

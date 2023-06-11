@@ -12,7 +12,7 @@ class Solution {
     }
 };
 
-/// 迭代法. 更快. 
+/// 迭代法
 class Solution2 {
    public:
     inline vector<int> preorderTraversal(TreeNode* root) {
@@ -23,9 +23,21 @@ class Solution2 {
     }
 };
 
+/// 迭代法2
+class Solution3 {
+   public:
+    inline vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> res;
+        res.reserve(105);
+        preorder_traversal3(root, res);
+        return res;
+    }
+};
+
 int main() {
     TreeNode* root = to_tree({1, nullopt, 2});
     cout << Solution().preorderTraversal(root) << '\n';
     cout << Solution2().preorderTraversal(root) << '\n';
+    cout << Solution3().preorderTraversal(root) << '\n';
     return 0;
 }
