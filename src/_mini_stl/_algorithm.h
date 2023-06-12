@@ -23,6 +23,7 @@ OutputIterator partial_sum(InputIterator first, InputIterator last, OutputIterat
 //
 template <typename InputIterator, typename OutputIterator>
 OutputIterator copy(InputIterator first, InputIterator last, OutputIterator res) {
+    /// TODO: 使用memmove加速
     while (first != last) {
         *res = *first;
         ++first;
@@ -31,13 +32,13 @@ OutputIterator copy(InputIterator first, InputIterator last, OutputIterator res)
     return res;
 }
 
-template <typename InputIterator, typename Predicate>
+template <typename InputIterator, typename UnaryPredicate>
 typename std::iterator_traits<InputIterator>::difference_type count_if(InputIterator first,
                                                                        InputIterator last,
-                                                                       Predicate pred) {
+                                                                       UnaryPredicate unary_pred) {
     typename std::iterator_traits<InputIterator>::difference_type res = 0;
     while (first != last) {
-        if (pred(*first)) {
+        if (unary_pred(*first)) {
             ++res;
         }
         ++first;

@@ -14,7 +14,7 @@
    4. `_mini_stl`: mini_stl库(mini标准库)实现, 使用**mini_stl**命名空间. (适配**c++17**标准). 
       1. 只是为了学习. 以后会对标准库进行**拓展**
    5. `_ml`: ml库(机器学习库)实现, 类似于python的numpy实现. 使用**ml**命名空间. 
-3. `/answer`: leetcode习题解答. 可以作为examples查看用法. 
+3. `/answer`: **leetcode习题解答**. 可以作为examples查看用法. 
 4. `/tests`: 测试文件. 可以作为examples查看用法. 
 5. `/bin`: 用来生成二进制文件. 
 
@@ -47,6 +47,6 @@
 
 
 ## Env
-1. ubuntu
+1. ubuntu 22.04.2 LTS
 2. g++ (需要支持c++17标准)
 3. python>=3.8
