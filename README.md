@@ -1,6 +1,9 @@
 # LeetCode-Cpp
 
 1. 开发中...
+   1. 以后算法库实现将使用c++. 
+   2. python版本将被废弃. 并将**c++**实现的算法库用**cython**包装给**python**调用. 
+   3. 将在9月之前出v0.0.1版本. 
 2. python版本: [https://github.com/Jintao-Huang/LeetCode-Py](https://github.com/Jintao-Huang/LeetCode-Py)
 
 
@@ -14,7 +17,7 @@
    4. `_mini_stl`: mini_stl库(mini标准库)实现, 使用**mini_stl**命名空间. (适配**c++17**标准). 
       1. 只是为了学习. 以后会对标准库进行**拓展**
    5. `_ml`: ml库(机器学习库)实现, 类似于python的numpy实现. 使用**ml**命名空间. 
-   6. `_c++2a`: c++17以上版本实现的一些函数和类实现. 
+   6. `_c++2a`: **c++17以上**版本实现的一些函数和类实现. 
    7. `_java`: java语言中的一些算法. (一些算法源码转为c++)
 3. `/answer`: **leetcode习题解答**. 可以作为examples查看用法. 
 4. `/tests`: 测试文件. 可以作为examples查看用法. 
