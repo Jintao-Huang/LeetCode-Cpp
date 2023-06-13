@@ -9,7 +9,7 @@ namespace leetcode {
 //
 inline ostream &operator<<(ostream &out, ListNode *ln){
     vector<int> res;
-    from_linkedlist(ln, res);
+    from_list(ln, res);
     return out << res;
 }
 inline ostream &operator<<(ostream &out, TreeNode *tn){

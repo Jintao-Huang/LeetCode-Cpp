@@ -41,7 +41,6 @@ void partial_sum_lc(const vector<Tp>& nums, vector<Tp>& res,
 bool bracket_matching(const string& s) {
     vector<char> st;
     int n = s.size();
-    st.reserve(n);
     for (int i = 0; i < n; ++i) {
         char c = s[i];
         //
@@ -67,7 +66,6 @@ void two_sum(const vector<int>& nums, int target, vector<int>& res) {
     /// res. start from 0.
     unordered_map<int, int> mapper;
     int n = nums.size();
-    mapper.reserve(n);
     for (int i = 0; i < n; ++i) {
         int x = nums[i], tmx = target - x;  // minus
         if (mapper.count(tmx)) {
@@ -92,7 +90,7 @@ int get_vv_size(const vector<vector<Tp>>& vv) {
 }
 
 template <typename Tp>
-void flatten_vector(const vector<vector<Tp>>& vv, vector<Tp>& res) {
+void flatten_vv(const vector<vector<Tp>>& vv, vector<Tp>& res) {
     int n = vv.size();
     for (int i = 0; i < n; ++i) {
         const vector<Tp>& v = vv[i];
@@ -101,6 +99,20 @@ void flatten_vector(const vector<vector<Tp>>& vv, vector<Tp>& res) {
             res.push_back(v[j]);
         }
     }
+}
+
+int fib(int n) {
+    // fib(0)=0, 1, 1, 2...
+    if (n == 0) {
+        return 0;
+    }
+    int i = 0, j = 1;
+    while (--n) {
+        int tmp = i;
+        i = j;
+        j += tmp;
+    }
+    return j;
 }
 
 }  // namespace leetcode

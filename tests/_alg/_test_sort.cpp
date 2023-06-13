@@ -39,4 +39,10 @@ int main() {
         insert_sort(v.begin(), v.end());
         cout << v << '\n';
     }
+    {
+        vector<int> v = {4, 5, 2, 1, 9, 8, 0, 7, 6};
+        auto first = v.begin(), last = v.end();
+        heap_sort(v.begin(), v.end());
+        cout << v << '\n';
+    }
 }

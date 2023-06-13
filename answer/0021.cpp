@@ -9,8 +9,8 @@ class Solution {
 };
 
 int main() {
-    ListNode *list1 = to_linkedlist({1, 2, 4});
-    ListNode *list2 = to_linkedlist({1, 3, 4});
+    ListNode *list1 = to_list({1, 2, 4});
+    ListNode *list2 = to_list({1, 3, 4});
     ListNode *res = Solution().mergeTwoLists(list1, list2);
     cout << res << '\n';
     return 0;

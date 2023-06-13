@@ -29,7 +29,7 @@ int main() {
                                      {4, 5.3}};
         vector<double> res;
         res.reserve(get_vv_size(vv));
-        flatten_vector(vv, res);
+        flatten_vv(vv, res);
         cout << res << '\n';
     }
     return 0;

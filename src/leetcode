@@ -5,13 +5,15 @@
 #include <_io.h>
 #include <_types.h>
 #include <_utils.h>
-
 // _alg
 #include <_alg/_array.h>
 #include <_alg/_bisect.h>
-#include <_alg/_linkedlist.h>
+#include <_alg/_list.h>
 #include <_alg/_sort.h>
 #include <_alg/_tree.h>
+
+// _c++2a
+#include <_c++2a/_algorithm.h>
 
 // _ds
 

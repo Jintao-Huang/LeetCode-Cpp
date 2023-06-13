@@ -6,7 +6,6 @@ class Solution {
    public:
     bool isValid(const string &s) {
         vector<char> st;
-        st.reserve(s.size());
         for (char c : s) {
             switch (c) {
                 case '(':
@@ -45,7 +44,6 @@ class Solution2 {
     bool isValid(const string &s) {
         unordered_map<char, char> mapper = {{')', '('}, {']', '['}, {'}', '{'}};
         vector<char> st;
-        st.reserve(s.size());
         for (char c : s) {
             if (mapper.count(c)) {
                 if (st.empty() || st.back() != mapper[c]) {

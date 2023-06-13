@@ -4,7 +4,6 @@ class Solution {
    public:
     inline vector<vector<int>> levelOrder(TreeNode *root) {
         vector<vector<int>> res;
-        res.reserve(100);
         level_order_traversal(root, res);
         return res;
     }

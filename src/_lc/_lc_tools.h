@@ -5,7 +5,7 @@
 #include <_types.h>
 
 namespace leetcode {
-ListNode *to_linkedlist(const vector<int> &v) {
+ListNode *to_list(const vector<int> &v) {
     ListNode *dummy = new ListNode(), *p = dummy;
     for (int x : v) {
         p->next = new ListNode(x);
@@ -14,7 +14,7 @@ ListNode *to_linkedlist(const vector<int> &v) {
     return dummy->next;
 }
 
-void from_linkedlist(ListNode *head, vector<int> &res) {
+void from_list(ListNode *head, vector<int> &res) {
     while (head) {
         res.push_back(head->val);
         head = head->next;

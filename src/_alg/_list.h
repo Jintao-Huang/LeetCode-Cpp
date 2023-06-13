@@ -20,6 +20,27 @@ ListNode* merge_list(ListNode* list1, ListNode* list2) {
     p->next = list1 ? list1 : list2;
     return dummy->next;
 }
+
+ListNode* reverse_list(ListNode* first, ListNode* last = nullptr) {
+    // [first, last)
+    ListNode* res = last;
+    while (first != last) {
+        ListNode* _first_next = first->next;
+        first->next = res;
+        res = first;
+        first = _first_next;
+    }
+    return res;
+}
+
+ListNode* middle_node(ListNode* first, ListNode* last = nullptr) {
+    ListNode* slow = first;  // first: fast
+    while (first != last && first->next != last) {
+        slow = slow->next;
+        first = first->next->next;
+    }
+    return slow;
+}
 }  // namespace leetcode
 
 #endif

@@ -6,7 +6,6 @@ class Solution {
    public:
     inline vector<int> preorderTraversal(TreeNode* root) {
         vector<int> res;
-        res.reserve(105);
         preorder_traversal(root, res);
         return res;
     }
@@ -17,7 +16,6 @@ class Solution2 {
    public:
     inline vector<int> preorderTraversal(TreeNode* root) {
         vector<int> res;
-        res.reserve(105);
         preorder_traversal2(root, res);
         return res;
     }
@@ -28,7 +26,6 @@ class Solution3 {
    public:
     inline vector<int> preorderTraversal(TreeNode* root) {
         vector<int> res;
-        res.reserve(105);
         preorder_traversal3(root, res);
         return res;
     }

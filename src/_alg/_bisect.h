@@ -58,12 +58,12 @@ Tp upper_bound_lc(Tp lo, Tp hi, Predicate pred) {
 }
 
 template <typename RandomIterator, typename Tp>
-inline RandomIterator bisect_left(RandomIterator first, RandomIterator last, Tp x) {
+inline RandomIterator _bisect_left(RandomIterator first, RandomIterator last, Tp x) {
     return lower_bound_lc(first, last, [x](RandomIterator mid) -> bool { return *mid >= x; });
 }
 
 template <typename RandomIterator, typename Tp>
-inline RandomIterator bisect_right(RandomIterator first, RandomIterator last, Tp x) {
+inline RandomIterator _bisect_right(RandomIterator first, RandomIterator last, Tp x) {
     return lower_bound_lc(first, last, [x](RandomIterator mid) -> bool { return *mid > x; });
 }
 

@@ -6,7 +6,6 @@ class Solution {
    public:
     inline vector<int> inorderTraversal(TreeNode *root) {
         vector<int> res;
-        res.reserve(105);
         inorder_traversal(root, res);
         return res;
     }
@@ -17,7 +16,6 @@ class Solution2 {
    public:
     inline vector<int> inorderTraversal(TreeNode *root) {
         vector<int> res;
-        res.reserve(105);
         inorder_traversal2(root, res);
         return res;
     }
