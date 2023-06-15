@@ -8,9 +8,6 @@ class Solution {
     }
 };
 
-/// TODO: 自己实现unique.
-class Solutions {};
-
 int main() {
     vector<int> nums = {1, 1, 2};
     cout << Solution().removeDuplicates(nums) << '\n';

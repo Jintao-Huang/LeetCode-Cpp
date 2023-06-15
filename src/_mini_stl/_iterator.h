@@ -1,3 +1,6 @@
+// Author: Jintao Huang
+// Email: huangjintao@mail.ustc.edu.cn
+// Date:
 
 #ifndef _MINI_STL_ITERATOR_H
 #define _MINI_STL_ITERATOR_H 1

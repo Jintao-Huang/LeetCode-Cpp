@@ -1,3 +1,7 @@
+// Author: Jintao Huang
+// Email: huangjintao@mail.ustc.edu.cn
+// Date:
+
 #ifndef _LC_DS_H
 #define _LC_DS_H 1
 

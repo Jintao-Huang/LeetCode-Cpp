@@ -45,6 +45,7 @@ int main() {
         cout << v2.size() << '\n';
         fill(v2.begin(), v2.end(), '\1');  // memset优化.
     }
+    cout << '\n';
     // test adjacent_find, unique
         {
         vector<int> v = {1, 2, 2, 3, 4, 4, 5, 5};

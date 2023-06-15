@@ -1,3 +1,7 @@
+// Author: Jintao Huang
+// Email: huangjintao@mail.ustc.edu.cn
+// Date:
+
 #ifndef _ML_NP_H
 #define _ML_NP_H 1
 #include <_types.h>

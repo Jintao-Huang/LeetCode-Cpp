@@ -1,3 +1,7 @@
+// Author: Jintao Huang
+// Email: huangjintao@mail.ustc.edu.cn
+// Date:
+
 #ifndef _ALG_TREE_H
 #define _ALG_TREE_H 1
 #include <_lc/_lc_ds.h>
@@ -87,7 +91,7 @@ void preorder_traversal3(TreeNode *root, vector<int> &res) {
     }
 }
 
-void inorder_traversal2(TreeNode *root, vector<int> &res) {
+void inorder_traversal3(TreeNode *root, vector<int> &res) {
     stack<TreeNode *> st;
     TreeNode *cur_tn = root;
     while (!st.empty() || cur_tn) {
@@ -148,6 +152,21 @@ void level_order_traversal(TreeNode *root, vector<vector<int>> &res) {
         }
         res.push_back(move(r));
     }
+}
+
+bool is_same_tree(TreeNode *t1, TreeNode *t2) {
+    /// 使用后序遍历
+    if (!t1 && !t2) {
+        return true;
+    }
+    if (t1 && !t2 || !t1 && t2) {
+        return false;
+    }
+    // t1, t2存在.
+    if (t1->val != t2->val) {
+        return false;
+    }
+    return is_same_tree(t1->left, t2->left) && is_same_tree(t1->right, t2->right);
 }
 
 }  // namespace leetcode

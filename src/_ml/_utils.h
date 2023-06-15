@@ -1,3 +1,7 @@
+// Author: Jintao Huang
+// Email: huangjintao@mail.ustc.edu.cn
+// Date:
+
 #ifndef _ML_UTILS_H
 #define _ML_UTILS_H 1
 #include <_types.h>

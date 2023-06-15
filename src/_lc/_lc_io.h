@@ -1,3 +1,7 @@
+// Author: Jintao Huang
+// Email: huangjintao@mail.ustc.edu.cn
+// Date:
+
 #ifndef _LC_IO_H
 #define _LC_IO_H 1
 #include <_types.h>

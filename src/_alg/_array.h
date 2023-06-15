@@ -1,3 +1,7 @@
+// Author: Jintao Huang
+// Email: huangjintao@mail.ustc.edu.cn
+// Date:
+
 #ifndef _ALG_ARRAY_H
 #define _ALG_ARRAY_H 1
 
@@ -113,6 +117,32 @@ int fib(int n) {
         j += tmp;
     }
     return j;
+}
+
+template <typename Tp>
+void intersection(const vector<vector<Tp>>& nums, vector<Tp>& res) {
+    unordered_map<Tp, int> um;
+    int n = nums.size();
+    if (!n) {
+        return;
+    };
+    //
+    for (int i = 0; i < n - 1; ++i) {
+        int m = nums[i].size();
+        for (int j = 0; j < m; ++j) {
+            const Tp& x = nums[i][j];
+            ++um[x];
+        }
+    }
+    //
+    int i = n - 1;
+    int m = nums[i].size();
+    for (int j = 0; j < m; ++j) {
+        const Tp& x = nums[i][j];
+        if (um[x] == n - 1) {
+            res.push_back(x);
+        }
+    }
 }
 
 }  // namespace leetcode

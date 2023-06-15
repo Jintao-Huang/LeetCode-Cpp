@@ -1,3 +1,7 @@
+// Author: Jintao Huang
+// Email: huangjintao@mail.ustc.edu.cn
+// Date:
+
 #ifndef _MINI_STL_UTILITY_H
 #define _MINI_STL_UTILITY_H 1
 #include <_types.h>

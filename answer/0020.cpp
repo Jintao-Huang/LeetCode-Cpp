@@ -1,12 +1,40 @@
 #include <leetcode>
 using namespace leetcode;
 
-/// 使用switch case
+
+/// 使用if else
 class Solution {
+   public:
+    inline bool isValid(const string &s) { return bracket_matching(s); }
+};
+
+/// 使用hashmap
+class Solution2 {
+   public:
+    bool isValid(const string &s) {
+        unordered_map<char, char> mapper = {{')', '('}, {']', '['}, {'}', '{'}};
+        vector<char> st;
+        for (const char &c : s) {
+            if (mapper.count(c)) {
+                if (st.empty() || st.back() != mapper[c]) {
+                    return false;
+                }
+                st.pop_back();
+                continue;
+            }
+            //
+            st.push_back(c);
+        }
+        return st.empty();
+    }
+};
+
+/// 使用switch case
+class Solution3 {
    public:
     bool isValid(const string &s) {
         vector<char> st;
-        for (char c : s) {
+        for (const char &c : s) {
             switch (c) {
                 case '(':
                 case '[':
@@ -36,33 +64,6 @@ class Solution {
         }
         return st.empty();
     }
-};
-
-/// 使用hashmap
-class Solution2 {
-   public:
-    bool isValid(const string &s) {
-        unordered_map<char, char> mapper = {{')', '('}, {']', '['}, {'}', '{'}};
-        vector<char> st;
-        for (char c : s) {
-            if (mapper.count(c)) {
-                if (st.empty() || st.back() != mapper[c]) {
-                    return false;
-                }
-                st.pop_back();
-                continue;
-            }
-            //
-            st.push_back(c);
-        }
-        return st.empty();
-    }
-};
-
-/// 使用if else
-class Solution3 {
-   public:
-    inline bool isValid(const string &s) { return bracket_matching(s); }
 };
 
 int main() {

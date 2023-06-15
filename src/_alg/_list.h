@@ -1,3 +1,7 @@
+// Author: Jintao Huang
+// Email: huangjintao@mail.ustc.edu.cn
+// Date:
+
 #ifndef _ALG_LINKEDLIST_H
 #define _ALG_LINKEDLIST_H 1
 

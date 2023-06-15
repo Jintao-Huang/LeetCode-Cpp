@@ -1,3 +1,6 @@
+// Author: Jintao Huang
+// Email: huangjintao@mail.ustc.edu.cn
+// Date:
 
 #ifndef _MINI_STL_NUMERIC_H
 #define _MINI_STL_NUMERIC_H 1

@@ -25,8 +25,8 @@ class Solution2 {
     inline vector<int> twoSum(vector<int> &numbers, int target) {
         vector<int> res;
         two_sum(numbers, target, res);
-        res[0] += 1;
-        res[1] += 1;
+        ++res[0];
+        ++res[1];
         return res;
     }
 };

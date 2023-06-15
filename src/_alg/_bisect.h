@@ -1,3 +1,7 @@
+// Author: Jintao Huang
+// Email: huangjintao@mail.ustc.edu.cn
+// Date:
+
 #ifndef _ALG_BISECT_H
 #define _ALG_BISECT_H 1
 
@@ -13,7 +17,7 @@ inline Tp get_mid(Tp lo, Tp hi) {
 }
 
 template <typename RandomIterator, typename Tp>
-RandomIterator binary_search_lc(RandomIterator first, RandomIterator last, Tp x) {
+RandomIterator binary_search_lc(RandomIterator first, RandomIterator last, const Tp &x) {
     RandomIterator _not_found = last;
     --last;
     while (first <= last) {
@@ -29,7 +33,7 @@ RandomIterator binary_search_lc(RandomIterator first, RandomIterator last, Tp x)
     return _not_found;
 }
 
-template <typename Tp, typename Predicate>
+template <typename Tp, typename Predicate>  // Tp: int, RandomIterator
 Tp lower_bound_lc(Tp lo, Tp hi, Predicate pred) {
     /// 满足pred的最小idx. [lo..hi]是res范围
     while (lo < hi) {
@@ -43,9 +47,9 @@ Tp lower_bound_lc(Tp lo, Tp hi, Predicate pred) {
     return lo;
 }
 
-template <typename Tp, typename Predicate>  // Tp: int, RandomIterator
+template <typename Tp, typename Predicate>
 Tp upper_bound_lc(Tp lo, Tp hi, Predicate pred) {
-    ///满足pred的最大idx. [lo..hi]是res范围
+    /// 满足pred的最大idx. [lo..hi]是res范围
     while (lo < hi) {
         Tp mid = get_mid(lo, hi + 1);
         if (pred(mid)) {
@@ -58,12 +62,12 @@ Tp upper_bound_lc(Tp lo, Tp hi, Predicate pred) {
 }
 
 template <typename RandomIterator, typename Tp>
-inline RandomIterator _bisect_left(RandomIterator first, RandomIterator last, Tp x) {
+inline RandomIterator _bisect_left(RandomIterator first, RandomIterator last, const Tp &x) {
     return lower_bound_lc(first, last, [x](RandomIterator mid) -> bool { return *mid >= x; });
 }
 
 template <typename RandomIterator, typename Tp>
-inline RandomIterator _bisect_right(RandomIterator first, RandomIterator last, Tp x) {
+inline RandomIterator _bisect_right(RandomIterator first, RandomIterator last, const Tp &x) {
     return lower_bound_lc(first, last, [x](RandomIterator mid) -> bool { return *mid > x; });
 }
 

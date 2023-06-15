@@ -6,7 +6,7 @@ class Solution {
         function<bool(int)> is_valid = [&piles, h](int mid) -> bool{
             int s = 0;
             double mid_d = static_cast<double>(mid);
-            for (int p : piles) {
+            for (const int &p : piles) {
                 //
                 s += static_cast<int>(ceil(p / mid_d));
                 if (s > h) {

@@ -1,3 +1,7 @@
+// Author: Jintao Huang
+// Email: huangjintao@mail.ustc.edu.cn
+// Date:
+
 #ifndef _LC_TOOLS_H
 #define _LC_TOOLS_H 1
 
@@ -7,7 +11,7 @@
 namespace leetcode {
 ListNode *to_list(const vector<int> &v) {
     ListNode *dummy = new ListNode(), *p = dummy;
-    for (int x : v) {
+    for (const int &x : v) {
         p->next = new ListNode(x);
         p = p->next;
     }

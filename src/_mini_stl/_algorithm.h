@@ -1,3 +1,6 @@
+// Author: Jintao Huang
+// Email: huangjintao@mail.ustc.edu.cn
+// Date:
 
 #ifndef _MINI_STL_ALGORITHM_H
 #define _MINI_STL_ALGORITHM_H 1
@@ -97,7 +100,7 @@ ForwardIterator _partition(ForwardIterator first, ForwardIterator last, Predicat
 
 template <typename BiIterator, typename Predicate>
 BiIterator _partition(BiIterator first, BiIterator last, Predicate pred,
-                       std::bidirectional_iterator_tag) {
+                      std::bidirectional_iterator_tag) {
     /// first之前的元素满足pred. first及其之后的元素不满足pred.
     while (true) {
         while (true) {
@@ -127,6 +130,89 @@ BiIterator _partition(BiIterator first, BiIterator last, Predicate pred,
 template <typename ForwardIterator, typename Predicate>
 ForwardIterator partition(ForwardIterator first, ForwardIterator last, Predicate pred) {
     return mini_stl::_partition(first, last, pred, mini_stl::_iterator_category(first));
+}
+
+template <typename ForwardIterator, typename BinaryPredicate = equal_to<>>
+ForwardIterator adjacent_find(ForwardIterator first, ForwardIterator last,
+                              BinaryPredicate binary_pred = BinaryPredicate()) {
+    if (first == last) {
+        return last;
+    }
+    ForwardIterator next = first;
+    while (++next != last) {
+        if (binary_pred(*first, *next)) {
+            return first;
+        }
+        first = next;
+    }
+    return last;
+}
+
+template <typename ForwardIterator, typename BinaryPredicate = equal_to<>>
+ForwardIterator unique(ForwardIterator first, ForwardIterator last,
+                       BinaryPredicate binary_pred = BinaryPredicate()) {
+    first = mini_stl::adjacent_find(first, last, binary_pred);
+    if (first == last) {
+        return last;
+    }
+
+    ForwardIterator dest = first;
+    ++first;
+    while (++first != last)
+        if (!binary_pred(*dest, *first)) {
+            *++dest = move(*first);
+        }
+    return ++dest;
+}
+
+template <typename ForwardIterator1, typename ForwardIterator2>
+inline void iter_swap(ForwardIterator1 a, ForwardIterator2 b) {
+    std::swap(*a, *b);
+}
+template <typename BiIterator>
+void _reverse(BiIterator first, BiIterator last, std::bidirectional_iterator_tag) {
+    while (true)
+        if (first == last || first == --last) {
+            return;
+        }
+
+        else {
+            mini_stl::iter_swap(first, last);
+            ++first;
+        }
+}
+
+template <typename RandomIterator>
+void _reverse(RandomIterator first, RandomIterator last, std::random_access_iterator_tag) {
+    if (first == last) {
+        return;
+    }
+    --last;
+    while (first < last) {
+        mini_stl::iter_swap(first, last);
+        ++first;
+        --last;
+    }
+}
+
+template <typename RandomIterator>
+void reverse(RandomIterator first, RandomIterator last) {
+    return mini_stl::_reverse(first, last, mini_stl::_iterator_category(first));
+}
+
+template <typename ForwardIterator, typename Compare = less<>>
+ForwardIterator min_element(ForwardIterator first, ForwardIterator last, Compare comp = Compare()) {
+    if (first == last) {
+        return first;
+    }
+    ForwardIterator result = first;
+    while (++first != last) {
+        if (comp(*first, *result)) {
+            result = first;
+        }
+    }
+
+    return result;
 }
 
 }  // namespace mini_stl
