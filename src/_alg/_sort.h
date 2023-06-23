@@ -120,5 +120,28 @@ void insert_sort(ForwardIterator first, ForwardIterator last) {
     }
 }
 
+/// count_sort: Ot(n+k), Os(n+k). k = max_val + 1 - min_val. (只支持整型). 稳定.
+/// bucket_sort: Ot(n+k), Os(n+k). k为桶个数. (支持整型, 浮点数等. 桶排序是计数排序的泛化,
+/// 每个桶需要单独排序). 稳定. radix_sort: Ot(nk). k为位数. (对每一位依次稳定排序, 先低位, 再高位)
+template <typename ForwardIterator>
+void count_sort(ForwardIterator first, ForwardIterator last, const int &min_val,
+                const int &max_val) {
+    /// [min_val..max_val]. hash的思想
+    int len = max_val + 1 - min_val;
+    vector<int> v(len);
+    ForwardIterator p = first;
+    while (p != last) {
+        ++v[*p - min_val];
+        ++p;
+    }
+    //
+    for (int i = 0; i < len; ++i) {
+        int val = i + min_val;
+        int count = v[i];
+        fill(first, first + count, val);
+        first += count;
+    }
+}
+
 }  // namespace leetcode
 #endif

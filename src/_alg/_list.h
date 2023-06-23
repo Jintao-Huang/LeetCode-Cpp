@@ -45,6 +45,32 @@ ListNode* middle_node(ListNode* first, ListNode* last = nullptr) {
     }
     return slow;
 }
+
+ListNode* last_nth_node(ListNode* head, int n) {
+    /// 最后一个节点为n=1. 不检测n是否合法.
+    ListNode *slow = head, *fast = head;
+    while (n--) {
+        fast = fast->next;
+    }
+    //
+    while (fast != nullptr) {
+        slow = slow->next;
+        fast = fast->next;
+    }
+    return slow;
+}
+
+ListNode* remove_last_nth_node(ListNode* head, int n, int& cur) {
+    if (head == nullptr) {
+        return nullptr;
+    }
+    head->next = remove_last_nth_node(head->next, n, cur);
+    if (++cur == n) {
+        return head->next;
+    }
+    return head;
+}
+
 }  // namespace leetcode
 
 #endif

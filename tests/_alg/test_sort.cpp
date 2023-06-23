@@ -45,4 +45,9 @@ int main() {
         heap_sort(v.begin(), v.end());
         cout << v << '\n';
     }
+    {
+        vector<int> v = {7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 7};
+        count_sort(v.begin(), v.end(), 0, 10);
+        cout << v << '\n';
+    }
 }

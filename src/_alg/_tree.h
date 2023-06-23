@@ -169,6 +169,13 @@ bool is_same_tree(TreeNode *t1, TreeNode *t2) {
     return is_same_tree(t1->left, t2->left) && is_same_tree(t1->right, t2->right);
 }
 
+int tree_max_depth(TreeNode *root) {
+    if (root == nullptr) {
+        return 0;
+    }
+    return max(tree_max_depth(root->left), tree_max_depth(root->right)) + 1;
+}
+
 /// heap
 template <typename Tp>  // int, unsigned int, ..
 inline Tp get_parent(Tp child) {

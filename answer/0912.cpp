@@ -38,7 +38,17 @@ class Solution4 {
     }
 };
 
-/// TODO: 其他解法: 基数排序, 堆排序.
+/// faster
+class Solution5 {
+   public:
+    inline vector<int> sortArray(vector<int>& nums) {
+        vector<int> res = move(nums);
+        int min_ = *min_element(res.begin(), res.end());
+        int max_ = *max_element(res.begin(), res.end());
+        count_sort(res.begin(), res.end(), min_, max_);
+        return res;
+    }
+};
 
 int main() {
     {
@@ -55,6 +65,10 @@ int main() {
     }
     {
         vector<int> v = {4, 5, 2, 1, 9, 8, 0, 7, 6};
+        cout << Solution4().sortArray(v) << '\n';
+    }
+    {
+        vector<int> v = {4, 5, 2, 1, 9, 8, 7, 6};
         cout << Solution4().sortArray(v) << '\n';
     }
 }
