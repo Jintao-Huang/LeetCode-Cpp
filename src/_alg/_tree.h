@@ -169,6 +169,15 @@ bool is_same_tree(TreeNode *t1, TreeNode *t2) {
     return is_same_tree(t1->left, t2->left) && is_same_tree(t1->right, t2->right);
 }
 
+/// heap
+template <typename Tp>  // int, unsigned int, ..
+inline Tp get_parent(Tp child) {
+    return (--child) >> 1;
+}
+template <typename Tp>
+inline Tp get_rchild(Tp parent) {
+    return ++parent << 1;
+}
 }  // namespace leetcode
 
 #endif

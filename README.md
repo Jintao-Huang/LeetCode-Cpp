@@ -24,7 +24,7 @@
       2. `_lc_io.h`: operator<<
       3. `_lc_tools`: to_list, from_list, to_tree, from_tree
    4. `_mini_stl`: mini_stl库(mini标准库)实现, 使用**mini_stl**命名空间. (适配**c++17**标准). 只是为了学习. 以后会对标准库进行**拓展**
-      1. `_algorithm.h`: partial_sum, copy, count_if, count, merge, partition, adjacent_find, unique, iter_swap, reverse, min_element
+      1. `_algorithm.h`: partial_sum, copy, count_if, count, merge, partition, adjacent_find, unique, iter_swap, reverse, min_element, make_heap, pop_heap, push_heap
       2. `_functional.h`: plus, multiplies, less, equal_to, less_equal
       3. `_iterator.h`: _iterator_category
       4. `_numeric.h`: accumulate
@@ -36,8 +36,9 @@
       1. `_io,h`: print, println, operator<<
       2. `_utils.h`: malloc_c, realloc_c, memset_c, memcpy_c, memmove_c
       3. `_types.h`: 一些库的导入. 
-   7. `_c++2a`: **c++17以上**版本实现的一些函数和类实现. 
-   8. `_java`: java语言中的一些算法. (一些算法源码转为c++)
+   7. `_java`: java语言中的一些算法. (一些算法源码转为c++)
+   8. `_cxx2a.h`: **c++17以上**版本实现的一些函数和类实现. 
+      1. sort_heap
 3. `/answer`: **leetcode习题解答**. 可以作为examples查看用法. 
 4. `/tests`: 测试文件. 可以作为examples查看用法. 
 5. `/bin`: 用来生成二进制文件. 

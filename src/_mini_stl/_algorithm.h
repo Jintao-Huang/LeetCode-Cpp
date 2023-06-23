@@ -17,7 +17,7 @@ OutputIterator partial_sum(InputIterator first, InputIterator last, OutputIterat
     typename std::iterator_traits<InputIterator>::value_type val = *first;
     *res = val;
     while (++first != last) {
-        val = binary_op(val, *first);
+        val = mini_stl::move(binary_op(val, *first));
         *++res = val;
     }
     return ++res;
@@ -160,7 +160,7 @@ ForwardIterator unique(ForwardIterator first, ForwardIterator last,
     ++first;
     while (++first != last)
         if (!binary_pred(*dest, *first)) {
-            *++dest = move(*first);
+            *++dest = mini_stl::move(*first);
         }
     return ++dest;
 }
@@ -205,14 +205,103 @@ ForwardIterator min_element(ForwardIterator first, ForwardIterator last, Compare
     if (first == last) {
         return first;
     }
-    ForwardIterator result = first;
+    ForwardIterator res = first;
     while (++first != last) {
-        if (comp(*first, *result)) {
-            result = first;
+        if (comp(*first, *res)) {
+            res = first;
         }
     }
 
-    return result;
+    return res;
+}
+/// heap
+
+template <typename DT>  // int, unsigned int, ..
+inline DT __get_parent(DT child) {
+    return (--child) >> 1;
+}
+template <typename DT>
+inline DT __get_rchild(DT parent) {
+    return ++parent << 1;
+}
+
+template <typename RandomIterator, typename DT, typename Tp, typename Compare>
+void _push_heap(RandomIterator first, DT hole_index, DT top_index, Tp val, Compare& comp) {
+    DT parent = __get_parent(hole_index);
+    while (hole_index > top_index && comp(*(first + parent), val)) {
+        *(first + hole_index) = mini_stl::move(*(first + parent));
+        hole_index = parent;
+        parent = __get_parent(hole_index);
+    }
+    *(first + hole_index) = mini_stl::move(val);
+}
+template <typename RandomIterator, typename DT, typename Tp, typename Compare>
+void _adjust_heap(RandomIterator first, DT hole_index, DT len, Tp val, Compare& comp) {
+    const DT top_index = hole_index;
+    DT second_child = hole_index;
+    DT len_parent = __get_parent(len);   // 最后一个节点的下一个的父节点.
+    while (second_child < len_parent) {  // 一定有两个child
+        second_child = __get_rchild(second_child);
+        if (comp(*(first + second_child), *(first + (second_child - 1)))) {
+            --second_child;
+        }
+        *(first + hole_index) = mini_stl::move(*(first + second_child));
+        hole_index = second_child;
+    }
+    // len偶数: 边的数量为奇数, 即最后一个父节点只有1个子节点.
+    if ((len & 1) == 0 && __get_parent(len - 1) == second_child) {
+        second_child = __get_rchild(second_child);
+        --second_child;
+        *(first + hole_index) = mini_stl::move(*(first + second_child));
+        hole_index = second_child;
+    }
+    mini_stl::_push_heap(first, hole_index, top_index, mini_stl::move(val), comp);
+}
+template <typename RandomIterator, typename Compare>
+inline void _pop_heap(RandomIterator first, RandomIterator last, RandomIterator res,
+                      Compare& comp) {
+    typedef typename std::iterator_traits<RandomIterator>::value_type VT;
+    typedef typename std::iterator_traits<RandomIterator>::difference_type DT;
+
+    VT val = mini_stl::move(*res);
+    *res = mini_stl::move(*first);
+    mini_stl::_adjust_heap(first, static_cast<DT>(0), static_cast<DT>(last - first),
+                           mini_stl::move(val), comp);
+}
+
+template <typename RandomIterator, typename Compare = less<>>
+void make_heap(RandomIterator first, RandomIterator last, Compare comp = Compare()) {
+    // 默认: 大根堆
+    typedef typename std::iterator_traits<RandomIterator>::value_type VT;
+    typedef typename std::iterator_traits<RandomIterator>::difference_type DT;
+    const DT len = last - first;
+    if (len <= 1) {
+        return;
+    }
+    DT parent = __get_parent(len - 1);
+    while (parent >= 0) {
+        VT val = mini_stl::move(*(first + parent));
+        mini_stl::_adjust_heap(first, parent, len, mini_stl::move(val), comp);
+        --parent;
+    }
+}
+
+template <typename RandomIterator, typename Compare = less<>>
+inline void push_heap(RandomIterator first, RandomIterator last, Compare comp = Compare()) {
+    typedef typename std::iterator_traits<RandomIterator>::difference_type DT;
+    DT len = last - first;
+    mini_stl::_push_heap(first, --len, static_cast<DT>(0), mini_stl::move(*(last - 1)), comp);
+}
+
+template <typename RandomIterator, typename Compare = less<>>
+inline void pop_heap(RandomIterator first, RandomIterator last, Compare comp = Compare()) {
+    typedef typename std::iterator_traits<RandomIterator>::difference_type DT;
+    DT len = last - first;
+    if (len <= 1) {
+        return;
+    }
+    --last;
+    mini_stl::_pop_heap(first, last, last, comp);
 }
 
 }  // namespace mini_stl

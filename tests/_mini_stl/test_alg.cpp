@@ -140,6 +140,28 @@ int main() {
         cout << *mini_stl::min_element(v.begin(), v.end()) << '\n';
         cout << *min_element(v.begin(), v.end()) << '\n';
     }
-
-    return 0;
+    /// heap
+    cout << '\n';
+    {
+        vector<int> v = {1, 3, 5, 6, 8, 9};
+        mini_stl::make_heap(v.begin(), v.end());
+        cout << v << '\n';
+        sort_heap(v.begin(), v.end());
+        cout << v << '\n';
+    }
+    //
+    {
+        vector<int> v = {1, 3, 5, 6, 8, 9};
+        cout << v << '\n';
+        mini_stl::make_heap(v.begin(), v.end());
+        cout << v << '\n';
+        //
+        v.push_back(10);
+        mini_stl::push_heap(v.begin(), v.end());
+        cout << v << '\n';
+        mini_stl::pop_heap(v.begin(), v.end());
+        cout << v.back() << '\n';
+        v.pop_back();
+        cout << v << '\n';
+    }
 }

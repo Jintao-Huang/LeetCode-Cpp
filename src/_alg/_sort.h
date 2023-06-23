@@ -1,16 +1,24 @@
+// Author: Jintao Huang
+// Email: huangjintao@mail.ustc.edu.cn
+// Date:
+
 #ifndef _ALG_SORT_H
 #define _ALG_SORT_H 1
 #include <_alg/_search.h>
+#include <_cxx2a.h>
 #include <_types.h>
 
 namespace leetcode {
 
 random_device __rd;
 default_random_engine __gen(__rd());
-inline int gen_randint(int lo, int hi) { return uniform_int_distribution<>(lo, --hi)(__gen); }
+inline int gen_randint(int lo, int hi) {
+    /// [lo..hi)
+    return uniform_int_distribution<>(lo, --hi)(__gen);
+}
 
 template <typename BiIterator, typename Tp>
-pair<BiIterator, BiIterator> three_way_partition(BiIterator first, BiIterator last, Tp val) {
+pair<BiIterator, BiIterator> three_way_partition(BiIterator first, BiIterator last, const Tp &val) {
     /// partition实现见mini_stl
     BiIterator it = first;
     while (it != last) {
@@ -71,6 +79,12 @@ void merge_sort(RandomIterator first, RandomIterator last) {
     merge_sort(first, mid);
     merge_sort(mid, last);
     inplace_merge(first, mid, last);
+}
+
+template <typename RandomIterator>
+void heap_sort(RandomIterator first, RandomIterator last) {
+    make_heap(first, last);
+    sort_heap_cxx2a(first, last);
 }
 
 template <typename ForwardIterator>

@@ -12,7 +12,7 @@ Tp accumulate(InputIterator first, InputIterator last, Tp init,
               BinaryOperation binary_op = BinaryOperation()) {
     while (first != last) {
         // binary_op: function<Tp(Tp, typename iterator_traits<InputIterator>::value_type)>
-        init = binary_op(init, *first);
+        init = mini_stl::move(binary_op(init, *first));
         ++first;
     }
     return init;

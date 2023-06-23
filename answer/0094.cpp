@@ -16,7 +16,7 @@ class Solution2 {
    public:
     inline vector<int> inorderTraversal(TreeNode *root) {
         vector<int> res;
-        inorder_traversal2(root, res);
+        inorder_traversal3(root, res);
         return res;
     }
 };

@@ -12,7 +12,7 @@ ostream &print(InputIterator first, InputIterator last, ostream &out = cout);
 //
 
 template <typename InputIterator>
-inline ostream &println(InputIterator first, InputIterator last, ostream &out = cout){
+inline ostream &println(InputIterator first, InputIterator last, ostream &out = cout) {
     return print(first, last, out) << '\n';
 }
 
@@ -104,5 +104,11 @@ ostream &print(InputIterator first, InputIterator last, ostream &out) {
     out << ']';
     return out;
 }
+
+void setting_io_faster() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);  // cout.tie(nullptr);
+}
+
 }  // namespace std
 #endif
