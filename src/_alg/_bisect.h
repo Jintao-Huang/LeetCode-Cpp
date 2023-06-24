@@ -19,11 +19,11 @@ inline Tp get_mid(Tp lo, Tp hi) {
 template <typename RandomIterator, typename Tp>
 RandomIterator binary_search_lc(RandomIterator first, RandomIterator last, const Tp &x) {
     RandomIterator _not_found = last;
-    --last;
-    while (first <= last) {
+    // [first..last)
+    while (first < last) {
         RandomIterator mid = get_mid(first, last);
         if (*mid > x) {
-            last = mid - 1;
+            last = mid;
         } else if (*mid < x) {
             first = mid + 1;
         } else {

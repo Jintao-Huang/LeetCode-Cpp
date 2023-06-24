@@ -5,6 +5,7 @@
 #ifndef _ALG_ARRAY_H
 #define _ALG_ARRAY_H 1
 
+#include <_alg/_sort.h>
 #include <_types.h>
 
 namespace leetcode {
@@ -141,6 +142,46 @@ void intersection(const vector<vector<Tp>>& nums, vector<Tp>& res) {
         const Tp& x = nums[i][j];
         if (um[x] == n - 1) {
             res.push_back(x);
+        }
+    }
+}
+
+template <typename RandomIterator>
+typename iterator_traits<RandomIterator>::value_type random_select(RandomIterator first,
+                                                                   RandomIterator last, int k) {
+    /// k: 从0开始
+    // [first..last)
+    auto k_it = first + k;
+    while (true) {
+        RandomIterator _last_m1 = last - 1;
+        iter_swap(first + gen_randint(0, _last_m1 - first), _last_m1);
+        auto [pivot, pivot2] = three_way_partition(first, last, *_last_m1);
+        if (k_it < pivot) {
+            last = pivot;
+        } else if (k_it >= pivot2) {
+            first = pivot2;
+        } else {
+            return *pivot;
+        }
+    }
+}
+
+template <typename RandomIterator>
+typename iterator_traits<RandomIterator>::value_type random_select2(RandomIterator first,
+                                                                    RandomIterator last, int k) {
+    /// k: 从0开始
+    // [first..last)
+    auto k_it = first + k;
+    while (true) {
+        RandomIterator _last_m1 = last - 1;
+        iter_swap(first + gen_randint(0, _last_m1 - first), _last_m1);
+        RandomIterator pivot = partition_lc(first, last);
+        if (k_it < pivot) {
+            last = pivot;
+        } else if (k_it > pivot) {
+            first = pivot + 1;
+        } else {
+            return *pivot;
         }
     }
 }

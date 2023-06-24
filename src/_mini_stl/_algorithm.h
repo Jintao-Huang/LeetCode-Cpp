@@ -116,10 +116,10 @@ BiIterator _partition(BiIterator first, BiIterator last, Predicate pred,
         while (true) {
             if (first == last) {
                 return first;
-            } else if (!pred(*last)) {  // !pred(nums[hi])
-                --last;
-            } else {
+            } else if (pred(*last)) {  // pred(nums[hi])
                 break;
+            } else {
+                --last;
             }
         }
         std::iter_swap(first, last);

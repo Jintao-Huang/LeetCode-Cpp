@@ -4,8 +4,8 @@ using namespace leetcode;
 
 int main() {
     {
-        vector<int> v = {4, 5, 2, 1, 9, 8, 0, 7, 6};
-        auto [it, it2] = three_way_partition(v.begin(), v.end(), 4);
+        vector<int> v = {4, 5, 2, 1, 9, 8, 4, 0, 7, 6};
+        auto [it, it2] = three_way_partition(v.begin(), v.end(), 0);
         cout << it - v.begin() << ' ' << it2 - v.begin() << '\n';
         cout << v << '\n';
     }
