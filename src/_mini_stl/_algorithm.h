@@ -17,7 +17,7 @@ OutputIterator partial_sum(InputIterator first, InputIterator last, OutputIterat
     typename std::iterator_traits<InputIterator>::value_type val = *first;
     *res = val;
     while (++first != last) {
-        val = mini_stl::move(binary_op(val, *first));
+        val = binary_op(mini_stl::move(val), *first);
         *++res = val;
     }
     return ++res;
@@ -222,6 +222,7 @@ inline DT __get_parent(DT child) {
 }
 template <typename DT>
 inline DT __get_rchild(DT parent) {
+    // lchild = rchild - 1
     return ++parent << 1;
 }
 

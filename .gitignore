@@ -6,3 +6,4 @@ __pycache__/
 *.out
 /_pass_test.txt
 /src/_trash.h
+/_py

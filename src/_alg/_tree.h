@@ -183,6 +183,7 @@ inline Tp get_parent(Tp child) {
 }
 template <typename Tp>
 inline Tp get_rchild(Tp parent) {
+    // lchild = rchild - 1
     return ++parent << 1;
 }
 }  // namespace leetcode
