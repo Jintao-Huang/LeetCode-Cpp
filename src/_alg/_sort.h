@@ -90,7 +90,7 @@ void merge_sort(RandomIterator first, RandomIterator last, const Compare &comp =
 }
 
 template <typename RandomIterator, typename Compare = less<>>
-void heap_sort(RandomIterator first, RandomIterator last, const Compare &comp = Compare()) {
+inline void heap_sort(RandomIterator first, RandomIterator last, const Compare &comp = Compare()) {
     make_heap(first, last, comp);
     sort_heap_cxx2a(first, last, comp);
 }

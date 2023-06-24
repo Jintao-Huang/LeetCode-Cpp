@@ -82,7 +82,7 @@ class Solution6 {
     }
 };
 
-/// TODO: 写partial_sort, nth_element.
+/// TODO: 写nth_element
 class Solution7 {
    public:
     inline vector<int> getLeastNumbers(vector<int>& arr, int k) {

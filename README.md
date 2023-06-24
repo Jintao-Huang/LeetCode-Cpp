@@ -19,7 +19,7 @@
       5. `_heap.h`: get_parent, get_rchild, push_heap_lc, adjust_heap_lc, pop_heap_lc, heap_select_lc
       6. `_list.h`: merge_list, reverse_list, middle_node, last_nth_node, remove_last_nth_node
       7. `_search.h`: n_queens_tostring, n_queens, n_queens_us
-      8. `_sort.h`: gen_randint, three_way_partition, partition_lc, quick_sort, quick_sort2, merge_sort, bubble_sort, select_sort, insert_sort, count_sort
+      8. `_sort.h`: gen_randint, three_way_partition, partition_lc, quick_sort, quick_sort2, merge_sort, heap_sort, bubble_sort, select_sort, insert_sort, count_sort
       9. `_tree.h`: preorder_traversal, inorder_traversal, postorder_traversal, preorder_traversal2, postorder_traversal2, preorder_traversal3, inorder_traversal3, postorder_traversal3, level_order_traversal, is_same_tree, tree_max_depth
    2. `_ds`: leetcode库的数据结构实现. 
    3. `_lc`: leetcode库的工具库实现. 
@@ -27,7 +27,7 @@
       2. `_lc_io.h`: operator<<
       3. `_lc_tools`: to_list, from_list, to_tree, from_tree
    4. `_mini_stl`: **mini_stl库**(mini标准库)实现, 使用**mini_stl**命名空间. (适配**c++17**标准). 只是为了学习. 以后会对标准库进行**拓展**
-      1. `_algorithm.h`: partial_sum, copy, count_if, count, merge, partition, adjacent_find, unique, iter_swap, reverse, min_element, make_heap, pop_heap, push_heap
+      1. `_algorithm.h`: partial_sum, copy, count_if, count, merge, partition, adjacent_find, unique, iter_swap, reverse, min_element, make_heap, pop_heap, push_heap, partial_sort 
       2. `_functional.h`: plus, multiplies, less, equal_to, less_equal
       3. `_iterator.h`: _iterator_category
       4. `_numeric.h`: accumulate
