@@ -4,6 +4,8 @@
 
 #ifndef _MINI_STL_ALGORITHM_H
 #define _MINI_STL_ALGORITHM_H 1
+#include <_alg/_heap.h>
+#include <_cxx2a.h>
 #include <_mini_stl/_functional.h>
 #include <_mini_stl/_iterator.h>
 namespace mini_stl {
@@ -200,7 +202,7 @@ void reverse(RandomIterator first, RandomIterator last) {
     return mini_stl::_reverse(first, last, mini_stl::_iterator_category(first));
 }
 
-template <typename ForwardIterator, typename Compare = less<>>
+template <typename ForwardIterator, typename Compare = mini_stl::less<>>
 ForwardIterator min_element(ForwardIterator first, ForwardIterator last, Compare comp = Compare()) {
     if (first == last) {
         return first;
@@ -214,65 +216,10 @@ ForwardIterator min_element(ForwardIterator first, ForwardIterator last, Compare
 
     return res;
 }
+using leetcode::get_parent, leetcode::get_rchild;
+using leetcode::push_heap_lc, leetcode::pop_heap_lc, leetcode::adjust_heap_lc;
 /// heap
-
-template <typename DT>  // int, unsigned int, ..
-inline DT __get_parent(DT child) {
-    return (--child) >> 1;
-}
-template <typename DT>
-inline DT __get_rchild(DT parent) {
-    // lchild = rchild - 1
-    return ++parent << 1;
-}
-
-template <typename RandomIterator, typename DT, typename Tp, typename Compare>
-void _push_heap(RandomIterator first, DT hole_index, DT top_index, Tp val, const Compare& comp) {
-    /// 上滤
-    DT parent = __get_parent(hole_index);
-    while (hole_index > top_index && comp(*(first + parent), val)) {
-        *(first + hole_index) = mini_stl::move(*(first + parent));
-        hole_index = parent;
-        parent = __get_parent(hole_index);
-    }
-    *(first + hole_index) = mini_stl::move(val);
-}
-template <typename RandomIterator, typename DT, typename Tp, typename Compare>
-void _adjust_heap(RandomIterator first, DT hole_index, DT len, Tp val, const Compare& comp) {
-    /// 下滤
-    const DT top_index = hole_index;
-    DT second_child = hole_index;
-    DT len_parent = __get_parent(len);   // 最后一个节点的下一个的父节点.
-    while (second_child < len_parent) {  // 一定有两个child
-        second_child = __get_rchild(second_child);
-        if (comp(*(first + second_child), *(first + (second_child - 1)))) {
-            --second_child;
-        }
-        *(first + hole_index) = mini_stl::move(*(first + second_child));
-        hole_index = second_child;
-    }
-    // len偶数: 边的数量为奇数, 即最后一个父节点只有1个子节点.
-    if ((len & 1) == 0 && __get_parent(len - 1) == second_child) {
-        second_child = __get_rchild(second_child);
-        --second_child;
-        *(first + hole_index) = mini_stl::move(*(first + second_child));
-        hole_index = second_child;
-    }
-    mini_stl::_push_heap(first, hole_index, top_index, mini_stl::move(val), comp);
-}
-template <typename RandomIterator, typename Compare>
-inline void _pop_heap(RandomIterator first, RandomIterator last, RandomIterator res,
-                      const Compare& comp) {
-    typedef typename std::iterator_traits<RandomIterator>::value_type VT;
-    typedef typename std::iterator_traits<RandomIterator>::difference_type DT;
-
-    VT val = mini_stl::move(*res);
-    *res = mini_stl::move(*first);
-    mini_stl::_adjust_heap(first, static_cast<DT>(0), static_cast<DT>(last - first),
-                           mini_stl::move(val), comp);
-}
-
-template <typename RandomIterator, typename Compare = less<>>
+template <typename RandomIterator, typename Compare = mini_stl::less<>>
 void make_heap(RandomIterator first, RandomIterator last, Compare comp = Compare()) {
     // 默认: 大根堆
     typedef typename std::iterator_traits<RandomIterator>::value_type VT;
@@ -281,22 +228,22 @@ void make_heap(RandomIterator first, RandomIterator last, Compare comp = Compare
     if (len <= 1) {
         return;
     }
-    DT parent = __get_parent(len - 1);
+    DT parent = get_parent(len - 1);
     while (parent >= 0) {
         VT val = mini_stl::move(*(first + parent));
-        mini_stl::_adjust_heap(first, parent, len, mini_stl::move(val), comp);
+        adjust_heap_lc(first, parent, len, mini_stl::move(val), comp);
         --parent;
     }
 }
 
-template <typename RandomIterator, typename Compare = less<>>
+template <typename RandomIterator, typename Compare = mini_stl::less<>>
 inline void push_heap(RandomIterator first, RandomIterator last, Compare comp = Compare()) {
     typedef typename std::iterator_traits<RandomIterator>::difference_type DT;
     DT len = last - first;
-    mini_stl::_push_heap(first, --len, static_cast<DT>(0), mini_stl::move(*(last - 1)), comp);
+    push_heap_lc(first, --len, static_cast<DT>(0), mini_stl::move(*(last - 1)), comp);
 }
 
-template <typename RandomIterator, typename Compare = less<>>
+template <typename RandomIterator, typename Compare = mini_stl::less<>>
 inline void pop_heap(RandomIterator first, RandomIterator last, Compare comp = Compare()) {
     typedef typename std::iterator_traits<RandomIterator>::difference_type DT;
     DT len = last - first;
@@ -304,8 +251,14 @@ inline void pop_heap(RandomIterator first, RandomIterator last, Compare comp = C
         return;
     }
     --last;
-    mini_stl::_pop_heap(first, last, last, comp);
+    pop_heap_lc(first, last, last, comp);
 }
-
+using leetcode::heap_select_lc, leetcode::sort_heap_cxx2a;
+template <typename RandomIterator, typename Compare = mini_stl::less<>>
+inline void partial_sort(RandomIterator first, RandomIterator mid, RandomIterator last,
+                  const Compare& comp = Compare()) {
+    heap_select_lc(first, mid, last, comp);
+    sort_heap_cxx2a(first, mid, comp);
+}
 }  // namespace mini_stl
 #endif

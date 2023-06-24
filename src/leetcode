@@ -16,6 +16,7 @@
 #include <_alg/_bisect.h>
 #include <_alg/_bst.h>
 #include <_alg/_dp.h>
+#include <_alg/_heap.h>
 #include <_alg/_list.h>
 #include <_alg/_search.h>
 #include <_alg/_sort.h>

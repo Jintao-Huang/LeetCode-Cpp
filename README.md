@@ -15,8 +15,8 @@
       1. `_array.h`: euclidean_dist, manhattan_dist, partial_sum_lc, bracket_matching, two_sum, get_vv_size, flatten_vv, fib, intersection, quick_select, quick_select2
       2. `_bisect.h`: get_mid, binary_search_lc, lower_bound_lc, upper_bound_lc, _bisect_left, _bisect_right
       3. `_bst.h`: search_bst_node
-      4. `_dp.h`: LIS
-      5. `_heap.h`: get_parent, get_rchild
+      4. `_dp.h`: LIS, LIS2
+      5. `_heap.h`: get_parent, get_rchild, push_heap_lc, adjust_heap_lc, pop_heap_lc, heap_select_lc
       6. `_list.h`: merge_list, reverse_list, middle_node, last_nth_node, remove_last_nth_node
       7. `_search.h`: n_queens_tostring, n_queens, n_queens_us
       8. `_sort.h`: gen_randint, three_way_partition, partition_lc, quick_sort, quick_sort2, merge_sort, bubble_sort, select_sort, insert_sort, count_sort
@@ -41,7 +41,7 @@
       3. `_types.h`: 一些库的导入. 
       4. `_cxx2a.h`: **c++17以上**版本实现的一些函数和类实现.
          1. sort_heap
-   7. `_java`: java语言中的一些算法. (一些算法源码转为c++)
+      5. `_java`: java语言中的一些算法. (一些算法源码转为c++)
 3. `/answer`: **leetcode习题解答**. 可以作为examples查看用法. 
 4. `/tests`: 测试文件. 可以作为examples查看用法. 
 5. `/bin`: 用来生成二进制文件. 

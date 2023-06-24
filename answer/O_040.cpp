@@ -1,19 +1,25 @@
 #include <leetcode>
-#include <ml>
 using namespace leetcode;
+
+#define _PARTIAL_CASE                                  \
+    if (k == 0) {                                      \
+        return {};                                     \
+    }                                                  \
+    if (k == 1) {                                      \
+        return {*min_element(arr.begin(), arr.end())}; \
+    }                                                  \
+    int n = arr.size();                                \
+    if (k == n) {                                      \
+        return move(arr);                              \
+    }
 
 class Solution {
    public:
     inline vector<int> getLeastNumbers(vector<int>& arr, int k) {
-        if (k == 0) {
-            return {};
-        }
-        if (k == 1) {
-            return {*min_element(arr.begin(), arr.end())};
-        }
+        _PARTIAL_CASE
         sort(arr.begin(), arr.end());
-        vector<int> res(arr.begin(), arr.begin() + k);
-        return res;
+        arr.resize(k);
+        return move(arr);
     }
 };
 
@@ -21,24 +27,14 @@ class Solution {
 class Solution2 {
    public:
     vector<int> getLeastNumbers(vector<int>& arr, int k) {
-        if (k == 0) {
-            return {};
-        }
-        if (k == 1) {
-            return {*min_element(arr.begin(), arr.end())};
-        }
-        int n = arr.size();
-        if (k == n) {
-            sort(arr.begin(), arr.end());
-            return move(arr);
-        }
-        vector<int> res(k);
-        make_heap(arr.begin(), arr.end(), greater<>());  // 小根堆
+        _PARTIAL_CASE
+        auto last = arr.end();
+        make_heap(arr.begin(), last, greater<>());  // 小根堆
         for (int i = 0; i < k; ++i) {
-            res[i] = arr[0];
-            pop_heap(arr.begin(), arr.end(), greater<>());
-            arr.pop_back();
+            pop_heap(arr.begin(), last, greater<>());
+            --last;
         }
+        vector<int> res(arr.end() - k, arr.end());
         return res;
     }
 };
@@ -46,54 +42,54 @@ class Solution2 {
 class Solution3 {
    public:
     inline vector<int> getLeastNumbers(vector<int>& arr, int k) {
-        if (k == 0) {
-            return {};
-        }
+        _PARTIAL_CASE
         quick_select2(arr.begin(), arr.end(), k - 1);
-        vector<int> res(arr.begin(), arr.begin() + k);
-        return res;
+        arr.resize(k);
+        return move(arr);
     }
 };
 
-/// faster. three_way_partition优化.
 class Solution4 {
    public:
     inline vector<int> getLeastNumbers(vector<int>& arr, int k) {
-        if (k == 0) {
-            return {};
-        }
+        _PARTIAL_CASE
+        // 使用three_way_partition.
         quick_select(arr.begin(), arr.end(), k - 1);
-        vector<int> res(arr.begin(), arr.begin() + k);
-        return res;
+        arr.resize(k);
+        return move(arr);
     }
 };
 
+
 /// 大根堆法
-/// TODO: 整理nsmallest, nlargest函数, _adjust_heap加入namespace leetcode;
 class Solution5 {
    public:
     inline vector<int> getLeastNumbers(vector<int>& arr, int k) {
-        if (k == 0) {
-            return {};
-        }
-        if (k == 1) {
-            return {*min_element(arr.begin(), arr.end())};
-        }
-        int n = arr.size();
-        if (k == n) {
-            sort(arr.begin(), arr.end());
-            return move(arr);
-        }
-        //
-        vector<int> res(arr.begin(), arr.begin() + k);
-        make_heap(res.begin(), res.end());
-        for (int i = k; i < n; ++i) {
-            const int& x = arr[i];
-            if (res[0] > x) {
-                mini_stl::_adjust_heap(res.begin(), 0, k, x, less<>());
-            }
-        }
-        return res;
+        _PARTIAL_CASE
+        heap_select_lc(arr.begin(), arr.begin() + k, arr.end());
+        arr.resize(k);
+        return move(arr);
+    }
+};
+
+class Solution6 {
+   public:
+    inline vector<int> getLeastNumbers(vector<int>& arr, int k) {
+        _PARTIAL_CASE
+        partial_sort(arr.begin(), arr.begin() + k, arr.end());
+        arr.resize(k);
+        return move(arr);
+    }
+};
+
+/// TODO: 写partial_sort, nth_element.
+class Solution7 {
+   public:
+    inline vector<int> getLeastNumbers(vector<int>& arr, int k) {
+        _PARTIAL_CASE
+        nth_element(arr.begin(), arr.begin() + k, arr.end());
+        arr.resize(k);
+        return move(arr);
     }
 };
 
@@ -122,5 +118,15 @@ int main() {
         vector<int> arr = {3, 2, 1};
         int k = 2;
         cout << Solution5().getLeastNumbers(arr, k) << '\n';
+    }
+    {
+        vector<int> arr = {3, 2, 1};
+        int k = 2;
+        cout << Solution6().getLeastNumbers(arr, k) << '\n';
+    }
+    {
+        vector<int> arr = {3, 2, 1};
+        int k = 2;
+        cout << Solution7().getLeastNumbers(arr, k) << '\n';
     }
 }

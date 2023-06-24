@@ -17,20 +17,21 @@ inline int gen_randint(int a, int b) {
     return uniform_int_distribution<>(a, b)(__gen);
 }
 
-template <typename BiIterator, typename Tp>
-pair<BiIterator, BiIterator> three_way_partition(BiIterator first, BiIterator last, Tp val) {
+template <typename BiIterator, typename Tp, typename Compare = less<>>
+pair<BiIterator, BiIterator> three_way_partition(BiIterator first, BiIterator last, Tp val,
+                                                 const Compare &comp = Compare()) {
     /// partition实现见mini_stl.
     // note: 这里的Tp val不可以写成const Tp& val, 避免引用的内容是数组中的内容, 导致错误.
     BiIterator it = first;
     while (it != last) {
-        if (*it > val) {
-            while (*--last > val) {
+        if (comp(val, *it)) {
+            while (comp(val, *--last)) {
                 if (it == last) {
                     return {first, last};
                 }
             }
             iter_swap(it, last);
-        } else if (*it < val) {
+        } else if (comp(*it, val)) {
             iter_swap(first, it);
             ++first;
             ++it;
@@ -42,8 +43,8 @@ pair<BiIterator, BiIterator> three_way_partition(BiIterator first, BiIterator la
     return {first, last};
 }
 
-template <typename RandomIterator>
-void quick_sort(RandomIterator first, RandomIterator last) {
+template <typename RandomIterator, typename Compare = less<>>
+void quick_sort(RandomIterator first, RandomIterator last, const Compare &comp = Compare()) {
     if (last - first <= 1) {
         return;
     }
@@ -52,78 +53,79 @@ void quick_sort(RandomIterator first, RandomIterator last) {
     iter_swap(first + gen_randint(0, _last_m1 - first), _last_m1);
     // iter_swap(get_mid(first, _last_m1), _last_m1);  // 也可以取mid.
     // 三路partition优化
-    auto [pivot, pivot2] = three_way_partition(first, last, *_last_m1);
-    quick_sort(first, pivot);
-    quick_sort(pivot2, last);
+    auto [pivot, pivot2] = three_way_partition(first, last, *_last_m1, comp);
+    quick_sort(first, pivot, comp);
+    quick_sort(pivot2, last, comp);
 }
 
-template <typename BiIterator>
-inline BiIterator partition_lc(BiIterator first, BiIterator last) {
+template <typename BiIterator, typename Compare = less<>>
+inline BiIterator partition_lc(BiIterator first, BiIterator last, const Compare &comp = Compare()) {
     --last;
-    BiIterator pivot = partition(first, last, bind<>(less<>(), placeholders::_1, *last));
+    BiIterator pivot = partition(first, last, bind<>(comp, placeholders::_1, *last));
     iter_swap(pivot, last);
     return pivot;
 }
 
-template <typename RandomIterator>
-void quick_sort2(RandomIterator first, RandomIterator last) {
+template <typename RandomIterator, typename Compare = less<>>
+void quick_sort2(RandomIterator first, RandomIterator last, const Compare &comp = Compare()) {
     /// 反面案例: 没有随机数优化[1, 2, 3, 4...顺序/逆序] O(n^2)
     ///   没有三路partition优化([2, 2, 2, 2, ...相同元素] O(n^2).
     if (last - first <= 1) {
         return;
     }
-    RandomIterator pivot = partition_lc(first, last);  // _last_m1一定不满足pred
-    quick_sort2(first, pivot);
-    quick_sort2(pivot + 1, last);
+    RandomIterator pivot = partition_lc(first, last, comp);  // _last_m1一定不满足pred
+    quick_sort2(first, pivot, comp);
+    quick_sort2(pivot + 1, last, comp);
 }
 
-template <typename RandomIterator>
-void merge_sort(RandomIterator first, RandomIterator last) {
+template <typename RandomIterator, typename Compare = less<>>
+void merge_sort(RandomIterator first, RandomIterator last, const Compare &comp = Compare()) {
     if (last - first <= 1) {
         return;
     }
     RandomIterator mid = get_mid(first, last);
-    merge_sort(first, mid);
-    merge_sort(mid, last);
-    inplace_merge(first, mid, last);
+    merge_sort(first, mid, comp);
+    merge_sort(mid, last, comp);
+    inplace_merge(first, mid, last, comp);
 }
 
-template <typename RandomIterator>
-void heap_sort(RandomIterator first, RandomIterator last) {
-    make_heap(first, last);
-    sort_heap_cxx2a(first, last);
+template <typename RandomIterator, typename Compare = less<>>
+void heap_sort(RandomIterator first, RandomIterator last, const Compare &comp = Compare()) {
+    make_heap(first, last, comp);
+    sort_heap_cxx2a(first, last, comp);
 }
 
-template <typename ForwardIterator>
-void bubble_sort(ForwardIterator first, ForwardIterator last) {
+template <typename ForwardIterator, typename Compare = less<>>
+void bubble_sort(ForwardIterator first, ForwardIterator last, const Compare &comp = Compare()) {
     while (first != --last) {
         ForwardIterator p = first;
         while (p != last) {
             ForwardIterator _p_prev = p;
             ++p;
-            if (*p < *_p_prev) {
+            if (comp(*p, *_p_prev)) {
                 iter_swap(_p_prev, p);
             }
         }
     }
 }
 
-template <typename ForwardIterator>
-void select_sort(ForwardIterator first, ForwardIterator last) {
+template <typename ForwardIterator, typename Compare = less<>>
+void select_sort(ForwardIterator first, ForwardIterator last, const Compare &comp = Compare()) {
     while (first != last) {
-        iter_swap(first, min_element(first, last));  // 不使用 first++避免未定义行为(有两个first)
+        iter_swap(first,
+                  min_element(first, last, comp));  // 不使用 first++避免未定义行为(有两个first)
         ++first;
     }
 }
 
-template <typename ForwardIterator>
-void insert_sort(ForwardIterator first, ForwardIterator last) {
+template <typename ForwardIterator, typename Compare = less<>>
+void insert_sort(ForwardIterator first, ForwardIterator last, const Compare &comp = Compare()) {
     ForwardIterator it = first;
     ++it;
     while (it != last) {
         ForwardIterator _it_prev = it;
         ++it;
-        rotate(upper_bound(first, _it_prev, *_it_prev), _it_prev, it);  // rotate ->1.
+        rotate(upper_bound(first, _it_prev, *_it_prev, comp), _it_prev, it);  // rotate ->1.
     }
 }
 

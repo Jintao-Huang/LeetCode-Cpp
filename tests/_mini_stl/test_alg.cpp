@@ -146,7 +146,7 @@ int main() {
         vector<int> v = {1, 3, 5, 6, 8, 9};
         mini_stl::make_heap(v.begin(), v.end());
         cout << v << '\n';
-        sort_heap(v.begin(), v.end());
+        leetcode::sort_heap_cxx2a(v.begin(), v.end());
         cout << v << '\n';
     }
     //
@@ -162,6 +162,14 @@ int main() {
         mini_stl::pop_heap(v.begin(), v.end());
         cout << v.back() << '\n';
         v.pop_back();
+        cout << v << '\n';
+    }
+    cout << "test partial_sort" << '\n';
+    {
+        vector<int> v = {6, 3, 2, 1, 7, 8, 5, 4};
+        mini_stl::partial_sort(v.begin(), v.begin() + 3, v.end());
+        cout << v << '\n';
+        mini_stl::partial_sort(v.begin(), v.begin() + 3, v.end(), greater<>());
         cout << v << '\n';
     }
 }

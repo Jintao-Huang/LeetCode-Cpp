@@ -11,7 +11,7 @@ namespace leetcode {
 template <typename RandomIterator, typename Compare = less<>>
 void sort_heap_cxx2a(RandomIterator first, RandomIterator last, Compare comp = Compare()) {
     while (last - first >= 2) {
-        pop_heap(first, last, comp);
+        std::pop_heap(first, last, comp);
         --last;
     }
 }
