@@ -6,16 +6,18 @@
 #define _LEETCODE 1
 
 // common
+#include <_cxx2a.h>
 #include <_io.h>
 #include <_types.h>
 #include <_utils.h>
-#include <_cxx2a.h>
 
 // _alg
 #include <_alg/_array.h>
 #include <_alg/_bisect.h>
 #include <_alg/_bst.h>
+#include <_alg/_dp.h>
 #include <_alg/_list.h>
+#include <_alg/_search.h>
 #include <_alg/_sort.h>
 #include <_alg/_tree.h>
 

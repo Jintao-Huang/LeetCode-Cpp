@@ -147,7 +147,7 @@ void intersection(const vector<vector<Tp>>& nums, vector<Tp>& res) {
 }
 
 template <typename RandomIterator>
-typename iterator_traits<RandomIterator>::value_type random_select(RandomIterator first,
+typename iterator_traits<RandomIterator>::value_type quick_select(RandomIterator first,
                                                                    RandomIterator last, int k) {
     /// k: 从0开始
     // [first..last)
@@ -167,7 +167,7 @@ typename iterator_traits<RandomIterator>::value_type random_select(RandomIterato
 }
 
 template <typename RandomIterator>
-typename iterator_traits<RandomIterator>::value_type random_select2(RandomIterator first,
+typename iterator_traits<RandomIterator>::value_type quick_select2(RandomIterator first,
                                                                     RandomIterator last, int k) {
     /// k: 从0开始
     // [first..last)

@@ -227,7 +227,8 @@ inline DT __get_rchild(DT parent) {
 }
 
 template <typename RandomIterator, typename DT, typename Tp, typename Compare>
-void _push_heap(RandomIterator first, DT hole_index, DT top_index, Tp val, Compare& comp) {
+void _push_heap(RandomIterator first, DT hole_index, DT top_index, Tp val, const Compare& comp) {
+    /// 上滤
     DT parent = __get_parent(hole_index);
     while (hole_index > top_index && comp(*(first + parent), val)) {
         *(first + hole_index) = mini_stl::move(*(first + parent));
@@ -237,7 +238,8 @@ void _push_heap(RandomIterator first, DT hole_index, DT top_index, Tp val, Compa
     *(first + hole_index) = mini_stl::move(val);
 }
 template <typename RandomIterator, typename DT, typename Tp, typename Compare>
-void _adjust_heap(RandomIterator first, DT hole_index, DT len, Tp val, Compare& comp) {
+void _adjust_heap(RandomIterator first, DT hole_index, DT len, Tp val, const Compare& comp) {
+    /// 下滤
     const DT top_index = hole_index;
     DT second_child = hole_index;
     DT len_parent = __get_parent(len);   // 最后一个节点的下一个的父节点.
@@ -260,7 +262,7 @@ void _adjust_heap(RandomIterator first, DT hole_index, DT len, Tp val, Compare& 
 }
 template <typename RandomIterator, typename Compare>
 inline void _pop_heap(RandomIterator first, RandomIterator last, RandomIterator res,
-                      Compare& comp) {
+                      const Compare& comp) {
     typedef typename std::iterator_traits<RandomIterator>::value_type VT;
     typedef typename std::iterator_traits<RandomIterator>::difference_type DT;
 

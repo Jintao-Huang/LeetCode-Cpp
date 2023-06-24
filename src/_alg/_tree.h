@@ -175,17 +175,6 @@ int tree_max_depth(TreeNode *root) {
     }
     return max(tree_max_depth(root->left), tree_max_depth(root->right)) + 1;
 }
-
-/// heap
-template <typename Tp>  // int, unsigned int, ..
-inline Tp get_parent(Tp child) {
-    return (--child) >> 1;
-}
-template <typename Tp>
-inline Tp get_rchild(Tp parent) {
-    // lchild = rchild - 1
-    return ++parent << 1;
-}
 }  // namespace leetcode
 
 #endif
