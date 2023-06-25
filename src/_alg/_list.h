@@ -10,7 +10,7 @@
 
 namespace leetcode {
 ListNode* merge_list(ListNode* list1, ListNode* list2) {
-    ListNode *dummy = new ListNode(), *p = dummy;
+    ListNode dummy, *p = &dummy;
     while (list1 && list2) {
         if (list1->val <= list2->val) {
             p->next = list1;
@@ -22,7 +22,7 @@ ListNode* merge_list(ListNode* list1, ListNode* list2) {
         p = p->next;
     }
     p->next = list1 ? list1 : list2;
-    return dummy->next;
+    return dummy.next;
 }
 
 ListNode* reverse_list(ListNode* first, ListNode* last = nullptr) {

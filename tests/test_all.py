@@ -12,7 +12,8 @@ class MyTest(ut.TestCase):
         for fname in fnames:
             print(f"<<< {fname}")
             fname_no_ext = fname.rsplit('.', 1)[0]
-            command = f"g++ -std=c++17 -fdiagnostics-color=always -g ./answer/{fname} -o ./bin/{fname_no_ext} -I ./src"
+            # -fsanitize=address: 开启内存错误检测
+            command = f"g++ -std=c++17 -fsanitize=address -fdiagnostics-color=always -g ./answer/{fname} -o ./bin/{fname_no_ext} -I ./src"
             os.system(command)
             os.system(f"./bin/{fname_no_ext}")
 
@@ -25,7 +26,7 @@ class MyTest(ut.TestCase):
                     continue
                 print(f"<<< {fname}")
                 src_path = os.path.join(cur_dir, fname)
-                command = f"g++ -fdiagnostics-color=always -g {src_path} -o ./bin/{fname_no_ext} -I ./src"
+                command = f"g++ -std=c++17 -fsanitize=address -fdiagnostics-color=always -g {src_path} -o ./bin/{fname_no_ext} -I ./src"
                 os.system(command)
                 os.system(f"./bin/{fname_no_ext}")
 if __name__ == "__main__":

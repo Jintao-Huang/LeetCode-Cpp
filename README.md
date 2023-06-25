@@ -23,7 +23,7 @@
       9. `_tree.h`: preorder_traversal, inorder_traversal, postorder_traversal, preorder_traversal2, postorder_traversal2, preorder_traversal3, inorder_traversal3, postorder_traversal3, level_order_traversal, is_same_tree, tree_max_depth
    2. `_ds`: leetcode库的数据结构实现. 
    3. `_lc`: leetcode库的工具库实现. 
-      1. `_lc_ds.h`: ListNode, TreeNode
+      1. `_lc_ds.h`: MemoManager, ListNode, TreeNode
       2. `_lc_io.h`: operator<<
       3. `_lc_tools`: to_list, from_list, to_tree, from_tree
    4. `_mini_stl`: **mini_stl库**(mini标准库)实现, 使用**mini_stl**命名空间. (适配**c++17**标准). 只是为了学习. 以后会对标准库进行**拓展**

@@ -9,13 +9,31 @@
 #include <_types.h>
 
 namespace leetcode {
+template <typename Tp>
+class MemoManager {
+    /// RAII
+   public:
+    vector<Tp> buf;
+    Tp create(Tp ptr) {
+        buf.push_back(ptr);
+        return ptr;
+    }
+    void clear() {
+        for (int i = 0; i < buf.size(); ++i) {
+            delete buf[i];
+        }
+    }
+    ~MemoManager() { clear(); }
+};
+MemoManager<ListNode *> __ln_mm;
+MemoManager<TreeNode *> __tn_mm;
 ListNode *to_list(const vector<int> &v) {
-    ListNode *dummy = new ListNode(), *p = dummy;
+    ListNode dummy, *p = &dummy;
     for (const int &x : v) {
-        p->next = new ListNode(x);
+        p->next = __ln_mm.create(new ListNode(x));
         p = p->next;
     }
-    return dummy->next;
+    return dummy.next;
 }
 
 void from_list(ListNode *head, vector<int> &res) {
@@ -30,7 +48,7 @@ TreeNode *to_tree(const vector<optional<int>> &v) {
     if (n == 0) {
         return nullptr;
     }
-    TreeNode *root = new TreeNode(v[0].value());
+    TreeNode *root = __tn_mm.create(new TreeNode(v[0].value()));
     deque<TreeNode *> dq = {root};
     int i = 1;
     while (!dq.empty()) {
@@ -43,7 +61,7 @@ TreeNode *to_tree(const vector<optional<int>> &v) {
         const optional<int> &lc_x = v[i];
         ++i;
         if (lc_x.has_value()) {
-            TreeNode *lc = new TreeNode(lc_x.value());
+            TreeNode *lc = __tn_mm.create(new TreeNode(lc_x.value()));
             dq.push_back(lc);
             parent->left = lc;
         }
@@ -54,7 +72,7 @@ TreeNode *to_tree(const vector<optional<int>> &v) {
         const optional<int> &rc_x = v[i];
         ++i;
         if (rc_x.has_value()) {
-            TreeNode *rc = new TreeNode(rc_x.value());
+            TreeNode *rc = __tn_mm.create(new TreeNode(rc_x.value()));
             dq.push_back(rc);
             parent->right = rc;
         }

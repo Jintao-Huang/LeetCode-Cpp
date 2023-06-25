@@ -5,5 +5,6 @@ fpath=$1
 folder=${fpath%/*}
 fname=${fpath##*/}
 fname_no_ext=${fname%.*}
-g++ -std=c++17 -fdiagnostics-color=always -g ${folder}/${fname} -o bin/${fname_no_ext} -I src
+# -fsanitize=address 开启内存错误检测
+g++ -std=c++17 -fsanitize=address -fdiagnostics-color=always -g ${folder}/${fname} -o bin/${fname_no_ext} -I src
 bin/${fname_no_ext}
