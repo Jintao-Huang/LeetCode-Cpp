@@ -4,6 +4,7 @@
 
 #ifndef _ALG_SEARCH_H
 #define _ALG_SEARCH_H 1
+#include <_ds/_union_find.h>
 #include <_lc/_lc_ds.h>
 #include <_types.h>
 
@@ -101,53 +102,158 @@ void n_queens2(int n, vector<bool> &visited_c, vector<bool> &visited_md, vector<
     }
 }
 ///
-void dfs(vector<vector<char>> &grid, int px, int py) {
-    grid[px][py] = '0';
+void dfs_grid(vector<vector<char>> &grid, int i, int j) {
+    grid[i][j] = '0';
     //
     int n = grid.size(), m = grid[0].size();
-    if (px + 1 < n && grid[px + 1][py] == '1') {
-        dfs(grid, px + 1, py);
+    if (i + 1 < n && grid[i + 1][j] == '1') {
+        dfs_grid(grid, i + 1, j);
     }
-    if (px - 1 >= 0 && grid[px - 1][py] == '1') {
-        dfs(grid, px - 1, py);
-    }
-
-    if (py + 1 < m && grid[px][py + 1] == '1') {
-        dfs(grid, px, py + 1);
+    if (i - 1 >= 0 && grid[i - 1][j] == '1') {
+        dfs_grid(grid, i - 1, j);
     }
 
-    if (py - 1 >= 0 && grid[px][py - 1] == '1') {
-        dfs(grid, px, py - 1);
+    if (j + 1 < m && grid[i][j + 1] == '1') {
+        dfs_grid(grid, i, j + 1);
+    }
+
+    if (j - 1 >= 0 && grid[i][j - 1] == '1') {
+        dfs_grid(grid, i, j - 1);
     }
 }
 
-void bfs(vector<vector<char>> &grid, int px, int py) {
-    deque<tuple<int, int>> dq = {{px, py}};
+void bfs_grid(vector<vector<char>> &grid, int i, int j) {
+    deque<tuple<int, int>> dq = {{i, j}};
     int n = grid.size(), m = grid[0].size();
 
     while (!dq.empty()) {
-        auto [px, py] = dq.front();
+        auto [i, j] = dq.front();
         dq.pop_front();
         //
-        if (px + 1 < n && grid[px + 1][py] == '1') {
-            grid[px + 1][py] = '0';
-            dq.push_back({px + 1, py});
+        if (i + 1 < n && grid[i + 1][j] == '1') {
+            grid[i + 1][j] = '0';
+            dq.push_back({i + 1, j});
         }
-        if (px - 1 >= 0 && grid[px - 1][py] == '1') {
-            grid[px - 1][py] = '0';
-            dq.push_back({px - 1, py});
-        }
-
-        if (py + 1 < m && grid[px][py + 1] == '1') {
-            grid[px][py + 1] = '0';
-            dq.push_back({px, py + 1});
+        if (i - 1 >= 0 && grid[i - 1][j] == '1') {
+            grid[i - 1][j] = '0';
+            dq.push_back({i - 1, j});
         }
 
-        if (py - 1 >= 0 && grid[px][py - 1] == '1') {
-            grid[px][py - 1] = '0';
-            dq.push_back({px, py - 1});
+        if (j + 1 < m && grid[i][j + 1] == '1') {
+            grid[i][j + 1] = '0';
+            dq.push_back({i, j + 1});
+        }
+
+        if (j - 1 >= 0 && grid[i][j - 1] == '1') {
+            grid[i][j - 1] = '0';
+            dq.push_back({i, j - 1});
         }
     }
+}
+
+int nums_connected_component_grid_xfs(vector<vector<char>> &grid, bool is_bfs = false) {
+    int n = grid.size(), m = grid[0].size();
+    function<void(vector<vector<char>> &, int, int)> xfs_grid;
+    if (is_bfs) {
+        xfs_grid = bfs_grid;
+    } else {
+        xfs_grid = dfs_grid;
+    }
+    //
+    int count = 0;
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            if (grid[i][j] == '1') {
+                ++count;
+                xfs_grid(grid, i, j);
+            }
+        }
+    }
+    return count;
+}
+
+int nums_connected_component_grid_uf(vector<vector<char>> &grid) {
+    int n = grid.size(), m = grid[0].size();
+    UnionFind uf(n * m);
+    int count = 0;
+    //
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            if (grid[i][j] == '1') {
+                ++count;
+                int idx = i * m + j;
+                //
+                if (i + 1 < n && grid[i + 1][j] == '1' && uf.union_set(idx + m, idx)) {
+                    --count;
+                }
+                if (j + 1 < m && grid[i][j + 1] == '1' && uf.union_set(idx + 1, idx)) {
+                    --count;
+                }
+            }
+        }
+    }
+    return count;
+}
+///
+void dfs_graph_m(vector<vector<int>> &graph, vector<bool> &visited, int gn) {
+    visited[gn] = true;
+    int n = graph.size();
+    for (int gn2 = 0; gn2 < n; ++gn2) {
+        if (graph[gn][gn2] && !visited[gn2]) {
+            dfs_graph_m(graph, visited, gn2);
+        }
+    }
+}
+
+void bfs_graph_m(vector<vector<int>> &graph, vector<bool> &visited, int gn) {
+    deque<int> dq = {gn};
+    int n = graph.size();
+    //
+    while (!dq.empty()) {
+        int gn = dq.front();
+        dq.pop_front();
+        for (int gn2 = 0; gn2 < n; ++gn2) {
+            if (graph[gn][gn2] && !visited[gn2]) {
+                visited[gn2] = true;
+                dq.push_back(gn2);
+            }
+        }
+    }
+}
+
+int nums_connected_component_graph_m_xfs(vector<vector<int>> &graph, bool is_bfs = false) {
+    int n = graph.size();
+    vector<bool> visited(n);
+    function<void(vector<vector<int>> &, vector<bool> &, int)> xfs_graph_m;
+    if (is_bfs) {
+        xfs_graph_m = dfs_graph_m;
+    } else {
+        xfs_graph_m = bfs_graph_m;
+    }
+    //
+    int count = 0;
+    for (int gn = 0; gn < n; ++gn) {
+        if (visited[gn]) {
+            continue;
+        }
+        ++count;
+        xfs_graph_m(graph, visited, gn);
+    }
+    return count;
+}
+
+int nums_connected_component_graph_m_uf(vector<vector<int>> &graph) {
+    int n = graph.size();
+    UnionFind uf(n);
+    int count = n;
+    for (int gn = 0; gn < n; ++gn) {
+        for (int gn2 = 0; gn2 < gn; ++gn2) {
+            if (graph[gn][gn2]) {
+                count -= uf.union_set(gn, gn2);
+            }
+        }
+    }
+    return count;
 }
 
 }  // namespace leetcode

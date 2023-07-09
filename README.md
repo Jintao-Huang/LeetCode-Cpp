@@ -11,17 +11,10 @@
 ## 文件夹介绍
 1. `/.vscode`: vscode配置文件
 2. `/src`: 含leetcode, mini stl, ml库
-   1. `_alg`: **leetcode库**的算法实现. leetcode库使用**leetcode**命名空间. 
-      1. `_array.h`: euclidean_dist, manhattan_dist, partial_sum_lc, bracket_matching, two_sum, get_vv_size, flatten_vv, fib, intersection, quick_select, quick_select2
-      2. `_bisect.h`: get_mid, binary_search_lc, lower_bound_lc, upper_bound_lc, _bisect_left, _bisect_right
-      3. `_bst.h`: search_bst_node
-      4. `_dp.h`: LIS, LIS2
-      5. `_heap.h`: get_parent, get_rchild, push_heap_lc, adjust_heap_lc, pop_heap_lc, heap_select_lc
-      6. `_list.h`: merge_list, reverse_list, middle_node, last_nth_node, remove_last_nth_node
-      7. `_search.h`: n_queens_tostring, n_queens, n_queens_us
-      8. `_sort.h`: gen_randint, three_way_partition, partition_lc, quick_sort, quick_sort2, merge_sort, heap_sort, bubble_sort, select_sort, insert_sort, count_sort
-      9. `_tree.h`: preorder_traversal, inorder_traversal, postorder_traversal, preorder_traversal2, postorder_traversal2, preorder_traversal3, inorder_traversal3, postorder_traversal3, level_order_traversal, is_same_tree, tree_max_depth
+   1. `_alg`: **leetcode库**的算法实现. leetcode库使用**leetcode**命名空间. ()
+      1. `_array.h`, `_bisect.h`, `_bst.h`, `_dp.h`, `_heap.h`, `_list.h`, `_search.h`, `_sort.h`, `_tree.h`
    2. `_ds`: leetcode库的数据结构实现. 
+      1. `_union_find.h`: UnionFind
    3. `_lc`: leetcode库的工具库实现. 
       1. `_lc_ds.h`: MemoManager, ListNode, TreeNode
       2. `_lc_io.h`: operator<<
@@ -67,8 +60,9 @@
 
 
 ## 性能
+(很多题号达不到100%是因为leetcode加了新的测试案例进去)
 1. 100%: 1, 19, 20, 21, 51, 52, 70, 92, 94, 102, 144, 145, 200, 300, 509, 700, 876, 912, 2248, O_40
-2. 95%: 26, 104, 167, 206, 704, 875, 
+2. 95%: 26, 104, 167, 206, 207, 210, 547, 704, 875, 
 3. 85%: 112, 344
 4. 60%: 
 5. 其他: 

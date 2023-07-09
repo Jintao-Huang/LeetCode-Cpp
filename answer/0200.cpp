@@ -4,66 +4,24 @@ using namespace leetcode;
 /// dfs
 class Solution {
    public:
-    int numIslands(vector<vector<char>>& grid) {
-        int n = grid.size(), m = grid[0].size();
-        //
-        int count = 0;
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < m; ++j) {
-                if (grid[i][j] == '1') {
-                    ++count;
-                    dfs(grid, i, j);
-                }
-            }
-        }
-        return count;
+    inline int numIslands(vector<vector<char>>& grid) {
+        return nums_connected_component_grid_xfs(grid);
     }
 };
 
 /// bfs
 class Solution2 {
    public:
-    int numIslands(vector<vector<char>>& grid) {
-        int n = grid.size(), m = grid[0].size();
-        //
-        int count = 0;
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < m; ++j) {
-                if (grid[i][j] == '1') {
-                    ++count;
-                    bfs(grid, i, j);
-                }
-            }
-        }
-        return count;
+    inline int numIslands(vector<vector<char>>& grid) {
+        return nums_connected_component_grid_xfs(grid, true);
     }
 };
 
 /// UF
-
 class Solution3 {
    public:
-    int numIslands(vector<vector<char>>& grid) {
-        int n = grid.size(), m = grid[0].size();
-        //
-        UnionFind uf(n * m);
-        int count = 0;
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < m; ++j) {
-                if (grid[i][j] == '1') {
-                    ++count;
-                    int idx = i * m + j;
-                    //
-                    if (i + 1 < n && grid[i + 1][j] == '1' && uf.union_set(idx + m, idx)) {
-                        --count;
-                    }
-                    if (j + 1 < m && grid[i][j + 1] == '1' && uf.union_set(idx + 1, idx)) {
-                        --count;
-                    }
-                }
-            }
-        }
-        return count;
+    inline int numIslands(vector<vector<char>>& grid) {
+        return nums_connected_component_grid_uf(grid);
     }
 };
 
