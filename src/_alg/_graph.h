@@ -7,7 +7,7 @@
 #include <_types.h>
 
 namespace leetcode {
-void topo_sort(const vector<vector<int>>& graph_l, vector<int>& res) {
+void topo_sort_bfs(const vector<vector<int>>& graph_l, vector<int>& res) {
     int n = graph_l.size();
     vector<int> in_degree(n);
     for (const vector<int>& g : graph_l) {
@@ -33,6 +33,43 @@ void topo_sort(const vector<vector<int>>& graph_l, vector<int>& res) {
     }
     if (res.size() < n) {
         res.clear();
+    }
+}
+
+enum struct State {
+    NOT_VISITED,
+    VISITING,
+    VISITED,
+};
+
+bool has_cycle(const vector<vector<int>>& graph_l, vector<State>& visited, vector<int>& res,
+               int i) {
+    visited[i] = State::VISITING;
+    for (const int& j : graph_l[i]) {
+        if (visited[j] == State::NOT_VISITED) {
+            if (!has_cycle(graph_l, visited, res, j)) {
+                return false;
+            }
+        } else if (visited[j] == State::VISITING) {
+            res.clear();
+            return false;
+        }
+    }
+    visited[i] = State::VISITED;
+    res.push_back(i);
+    return true;
+}
+
+void topo_sort_dfs(const vector<vector<int>>& graph_l, vector<int>& res) {
+    int n = graph_l.size();
+    vector<State> visited(n);
+    for (int i = 0; i < n; ++i) {
+        if (visited[i] == State::NOT_VISITED) {
+            if (!has_cycle(graph_l, visited, res, i)) {
+                res.clear();
+                break;
+            }
+        }
     }
 }
 }  // namespace leetcode
