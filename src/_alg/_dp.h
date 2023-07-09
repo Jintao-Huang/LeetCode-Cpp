@@ -23,7 +23,6 @@ int LIS(const vector<int>& nums) {
 }
 
 int LIS2(const vector<int>& nums) {
-    //- 遍历nums:i[0..n), j:[0..i), 如果nums[j]大于nums[i]. 则dp[j]=dp[i]+1
     int n = nums.size();
     vector<int> dp(n, 1);
     for (int i = 1; i < n; ++i) {

@@ -11,7 +11,7 @@
 namespace leetcode {
 template <typename Tp>
 class MemoManager {
-    /// RAII
+    /// RAII. 避免内存泄露
    public:
     vector<Tp> buf;
     Tp create(Tp ptr) {

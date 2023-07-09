@@ -53,7 +53,7 @@ void n_queens(int n, vector<bool> &visited_c, vector<bool> &visited_md, vector<b
 }
 
 void n_queens_us(int n, unordered_set<int> &visited_c, unordered_set<int> &visited_md,
-              unordered_set<int> &visited_cd, vector<int> &path, vector<vector<int>> &res) {
+                 unordered_set<int> &visited_cd, vector<int> &path, vector<vector<int>> &res) {
     /// visited: 列, 主对角线, 副对角线
     int idx = path.size();
     if (idx == n) {
@@ -78,9 +78,8 @@ void n_queens_us(int n, unordered_set<int> &visited_c, unordered_set<int> &visit
     }
 }
 
-
 void n_queens2(int n, vector<bool> &visited_c, vector<bool> &visited_md, vector<bool> &visited_cd,
-              int idx, int &res) {
+               int idx, int &res) {
     /// visited: 列, 主对角线, 副对角线
     if (idx == n) {
         ++res;
@@ -94,14 +93,62 @@ void n_queens2(int n, vector<bool> &visited_c, vector<bool> &visited_md, vector<
         visited_c[i] = true;
         visited_md[md_i] = true;
         visited_cd[cd_i] = true;
-        n_queens2(n, visited_c, visited_md, visited_cd, idx+1, res);
+        n_queens2(n, visited_c, visited_md, visited_cd, idx + 1, res);
         //
         visited_c[i] = false;
         visited_md[md_i] = false;
         visited_cd[cd_i] = false;
     }
 }
+///
+void dfs(vector<vector<char>> &grid, int px, int py) {
+    grid[px][py] = '0';
+    //
+    int n = grid.size(), m = grid[0].size();
+    if (px + 1 < n && grid[px + 1][py] == '1') {
+        dfs(grid, px + 1, py);
+    }
+    if (px - 1 >= 0 && grid[px - 1][py] == '1') {
+        dfs(grid, px - 1, py);
+    }
 
+    if (py + 1 < m && grid[px][py + 1] == '1') {
+        dfs(grid, px, py + 1);
+    }
+
+    if (py - 1 >= 0 && grid[px][py - 1] == '1') {
+        dfs(grid, px, py - 1);
+    }
+}
+
+void bfs(vector<vector<char>> &grid, int px, int py) {
+    deque<tuple<int, int>> dq = {{px, py}};
+    int n = grid.size(), m = grid[0].size();
+
+    while (!dq.empty()) {
+        auto [px, py] = dq.front();
+        dq.pop_front();
+        //
+        if (px + 1 < n && grid[px + 1][py] == '1') {
+            grid[px + 1][py] = '0';
+            dq.push_back({px + 1, py});
+        }
+        if (px - 1 >= 0 && grid[px - 1][py] == '1') {
+            grid[px - 1][py] = '0';
+            dq.push_back({px - 1, py});
+        }
+
+        if (py + 1 < m && grid[px][py + 1] == '1') {
+            grid[px][py + 1] = '0';
+            dq.push_back({px, py + 1});
+        }
+
+        if (py - 1 >= 0 && grid[px][py - 1] == '1') {
+            grid[px][py - 1] = '0';
+            dq.push_back({px, py - 1});
+        }
+    }
+}
 
 }  // namespace leetcode
 #endif

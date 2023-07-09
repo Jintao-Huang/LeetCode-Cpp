@@ -23,6 +23,7 @@
 #include <_alg/_tree.h>
 
 // _ds
+#include <_ds/_union_find.h>
 
 // _lc
 #include <_lc/_lc_ds.h>
